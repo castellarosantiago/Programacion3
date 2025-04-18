@@ -63,6 +63,17 @@ nav a {
     margin-bottom: 20px;
 }
 
+.slide {
+    display: none;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.slide.active {
+    display: block;
+}
+
 .carrusel {
     position: relative;
     width: 90%;
