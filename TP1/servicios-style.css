@@ -1,24 +1,29 @@
-body{
+html, body{
     width:100%;
     height:100%;
     margin:0;
+}
+
+body{
     background-color:#F3F3F3;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+
 }
 
 header{
     width:100%;
-    height:25%;
 }
 
 main{
     width:100%;
-    height:50%;
+    flex:1;
 }
 
 footer{
     width:100%;
-    height:25%;
 }
 
 .servicios{
@@ -46,16 +51,24 @@ footer{
 }
 
 .cards article{
-    width:340px;
-    height:300px;
+    width:320px;
+    height:270px;
     background-color:white;
     padding:10px;
     box-sizing:border-box;
     text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
 .cards article:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.cards article h3{
+    margin:11px;
 }
 
 .cards article p{
@@ -68,19 +81,20 @@ footer{
 .cards article button{
     width:110px;
     height:26;
-    background-color:green;
+    background-color:rgba(0, 128, 0, 0.74);
     border:none;
     border-radius:17px;
     color:#F3F3F3;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size:12px;
     text-align: center;
+    margin-top:auto;
 }
 
 .cards article button:hover{
     border:2px solid green;
     background-color: white;
-    color:black;
+    color:rgb(61, 60, 60);
 }
 
 .logos{
@@ -89,8 +103,9 @@ footer{
     height: 38px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin:25px 0px 0px 0px;
+    margin:20px 0px 0px 0px;
 }
+
 
 #hotel{
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='green' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M2.25 22h19.5M4 22V6.978c0-1.743 0-2.614.327-3.28A3.06 3.06 0 0 1 5.638 2.34C6.28 2 7.12 2 8.8 2h.4c1.68 0 2.52 0 3.162.34a3.06 3.06 0 0 1 1.311 1.359C14 4.364 14 5.235 14 6.978V22M10 6H8m2 4H8m2 4H8m11.8 8V11.444c0-2.305-.798-3.148-2.925-3.148H14'/%3E%3C/svg%3E");
