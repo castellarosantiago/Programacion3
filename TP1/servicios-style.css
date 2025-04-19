@@ -61,10 +61,13 @@ footer{
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    transition-duration: 1s;
+    box-shadow: 0 12px 16px 0 rgba(25, 25, 25, 0.073), 0 17px 50px 0 rgba(25, 25, 25, 0.073);
 }
 
 .cards article:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    
+    scale:1.1;
 }
 
 .cards article h3{
