@@ -16,7 +16,7 @@
 </head>
 <body>
     <header>
-        <a href=""><img class="logo" id="logo-header" src="./img/" alt="Logo de la pagina pq se rompio :( )"> </a>
+        <a href=""><img class="logo" id="logo-header" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ZW0iIGhlaWdodD0iNGVtIiB2aWV3Qm94PSIwIDAgNDggNDgiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjQiPjxwYXRoIGZpbGw9IiM3QUI3MzAiIGQ9Ik0xMSAxNC45OTlMNSAxNS45OTlDNi42MjkxNiA4LjQ4NDc4IDExLjM2NDIgNi4wMDYyNCAxNiA1Ljk5OTA0QzE4Ljk5NjggNS45OTQzOCAyMS45NTIxIDcuMDI1MSAyNCA3Ljk5OTYzQzI2LjA0NzkgNy4wMjUxIDI5IDUuOTk5ODggMzIgNS45OTk2MkMzNi42MTEzIDUuOTk5MjIgNDEuMzcwOCA4LjQ4NDc4IDQzIDE1Ljk5OUwzNyAxNC45OTlDMzcuNTU4OCAxNy4wOTkyIDM4Ljc4ODIgMjAuNzkxNSAzNyAyMy45OTlDMzQuMDE5NiAyMS4zMjYxIDI3LjEyOTQgMTcuMjkwMiAyNCAxNC45OTkxQzIwLjg3MDYgMTcuMjkwMiAxMy45ODA0IDIxLjMyNjEgMTEgMjMuOTk5QzkuMjExNzYgMjAuNzkxNSAxMC40NDEyIDE3LjA5OTIgMTEgMTQuOTk5WiIvPjxwYXRoIGQ9Ik0yNCAxNUMyMy4yNDU0IDE4Ljg4ODkgMjIuMTg4OSAyOC41MzMzIDI0IDM2Ii8+PHBhdGggZmlsbD0iIzdBQjczMCIgZD0iTTEyIDQxLjk5OTJIMzZDMzEuMjEzNCAzNy40MTQ2IDI5IDM2LjAwNDggMjQgMzZDMTkgMzUuOTk1MiAxMy44OTIgMzkuMzgxNyAxMiA0MS45OTkyWiIvPjwvZz48L3N2Zz4=" alt="Logo de la pagina pq se rompio :( )"> </a>
         <nav>
             <ul>
                 <li><a href="">Precios</a></li>
@@ -57,29 +57,6 @@
             
         </ul>
     </footer>
-    <script>
-        const slides = document.querySelectorAll('.slide');
-        const next = document.getElementById('next');
-        const prev = document.getElementById('prev');
-        let current = 0;
-    
-        function mostrarSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-        }
-    
-        next.addEventListener('click', () => {
-        current = (current + 1) % slides.length;
-        mostrarSlide(current);
-        });
-    
-        prev.addEventListener('click', () => {
-        current = (current - 1 + slides.length) % slides.length;
-        mostrarSlide(current);
-        });
-    
-        mostrarSlide(current); // Mostrar el primero al cargar
-    </script>
+<script src="./js/carrusel.js"></script>
 </body>
 </html>
