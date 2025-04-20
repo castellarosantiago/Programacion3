@@ -1,62 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taveler Agency</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Traveler Agency</title>
 
-<!-- Favicon-->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ZW0iIGhlaWdodD0iNGVtIiB2aWV3Qm94PSIwIDAgNDggNDgiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjQiPjxwYXRoIGZpbGw9IiM3QUI3MzAiIGQ9Ik0xMSAxNC45OTlMNSAxNS45OTlDNi42MjkxNiA4LjQ4NDc4IDExLjM2NDIgNi4wMDYyNCAxNiA1Ljk5OTA0QzE4Ljk5NjggNS45OTQzOCAyMS45NTIxIDcuMDI1MSAyNCA3Ljk5OTYzQzI2LjA0NzkgNy4wMjUxIDI5IDUuOTk5ODggMzIgNS45OTk2MkMzNi42MTEzIDUuOTk5MjIgNDEuMzcwOCA4LjQ4NDc4IDQzIDE1Ljk5OUwzNyAxNC45OTlDMzcuNTU4OCAxNy4wOTkyIDM4Ljc4ODIgMjAuNzkxNSAzNyAyMy45OTlDMzQuMDE5NiAyMS4zMjYxIDI3LjEyOTQgMTcuMjkwMiAyNCAxNC45OTkxQzIwLjg3MDYgMTcuMjkwMiAxMy45ODA0IDIxLjMyNjEgMTEgMjMuOTk5QzkuMjExNzYgMjAuNzkxNSAxMC40NDEyIDE3LjA5OTIgMTEgMTQuOTk5WiIvPjxwYXRoIGQ9Ik0yNCAxNUMyMy4yNDU0IDE4Ljg4ODkgMjIuMTg4OSAyOC41MzMzIDI0IDM2Ii8+PHBhdGggZmlsbD0iIzdBQjczMCIgZD0iTTEyIDQxLjk5OTJIMzZDMzEuMjEzNCAzNy40MTQ2IDI5IDM2LjAwNDggMjQgMzZDMTkgMzUuOTk1MiAxMy44OTIgMzkuMzgxNyAxMiA0MS45OTkyWiIvPjwvZz48L3N2Zz4=">
-<!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+  <!-- Favicon -->
+  <link rel="icon" href="./img/icon-park--vacation.svg">
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" />
+
+  <!-- Estilos del template -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-    <header>
-        <a href=""><img class="logo" id="logo-header" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ZW0iIGhlaWdodD0iNGVtIiB2aWV3Qm94PSIwIDAgNDggNDgiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjQiPjxwYXRoIGZpbGw9IiM3QUI3MzAiIGQ9Ik0xMSAxNC45OTlMNSAxNS45OTlDNi42MjkxNiA4LjQ4NDc4IDExLjM2NDIgNi4wMDYyNCAxNiA1Ljk5OTA0QzE4Ljk5NjggNS45OTQzOCAyMS45NTIxIDcuMDI1MSAyNCA3Ljk5OTYzQzI2LjA0NzkgNy4wMjUxIDI5IDUuOTk5ODggMzIgNS45OTk2MkMzNi42MTEzIDUuOTk5MjIgNDEuMzcwOCA4LjQ4NDc4IDQzIDE1Ljk5OUwzNyAxNC45OTlDMzcuNTU4OCAxNy4wOTkyIDM4Ljc4ODIgMjAuNzkxNSAzNyAyMy45OTlDMzQuMDE5NiAyMS4zMjYxIDI3LjEyOTQgMTcuMjkwMiAyNCAxNC45OTkxQzIwLjg3MDYgMTcuMjkwMiAxMy45ODA0IDIxLjMyNjEgMTEgMjMuOTk5QzkuMjExNzYgMjAuNzkxNSAxMC40NDEyIDE3LjA5OTIgMTEgMTQuOTk5WiIvPjxwYXRoIGQ9Ik0yNCAxNUMyMy4yNDU0IDE4Ljg4ODkgMjIuMTg4OSAyOC41MzMzIDI0IDM2Ii8+PHBhdGggZmlsbD0iIzdBQjczMCIgZD0iTTEyIDQxLjk5OTJIMzZDMzEuMjEzNCAzNy40MTQ2IDI5IDM2LjAwNDggMjQgMzZDMTkgMzUuOTk1MiAxMy44OTIgMzkuMzgxNyAxMiA0MS45OTkyWiIvPjwvZz48L3N2Zz4=" alt="Logo de la pagina pq se rompio :( )"> </a>
-        <nav>
-            <ul>
-                <li><a href="">Precios</a></li>
-                <li><a href="">Contacto</a></li>
-                <li><a href="">Sobre Nosotros</a></li>
-                <li><a href="">Agenda tu Viaje!</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        
-        <section class="home">
-            <div class="home-text"> Descripcion bla bla bla</div>
-            <div class="carrusel">
-                <div class="contenedor-del-carrusel">
-                <img class="slide active" src="./img/imagen1.jpg" alt="Imagen 1">
-                <img class="slide" src="./img/imagen2.jpg" alt="Imagen 2">
-                </div>
-                <button type="button" class="boton-carrusel" id="prev">&#10094;</button>
-                <button type="button" class="boton-carrusel" id="next">&#10095;</button>
-            </div>
+<body>
+    <div class="topbar">
+        <div class="container">
+          <div>
+            <i class="fa fa-envelope"></i> info@example.com
+            <span> | </span>
+            <i class="fa fa-phone-alt"></i> +012 345 6789
+          </div>
+          <div>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    
+      <header class="navbar">
+        <a href="#" class="logo">Traveler</a>
+        <nav>
+          <a href="#">Precios</a>
+          <a href="#">Contacto</a>
+          <a href="#">Sobre Nosotros</a>
+          <a href="#">Agenda tu Viaje!</a>
+        </nav>
+      </header>
+    
+      <main>
+        <section class="hero-carousel">
+          <img src="./img/Coliseo De Roma.jpeg" alt="Imagen 1" />
+          <img src="./img/hielos.jpeg" alt="Imagen 2" />
+          <img src="./img/rio-sunset.jpeg" alt="Imagen 3" />
+          <img src="./img/hotel4.jpeg" alt="Imagen 4" />
+          <img src="./img/turismoto.jpeg" alt="Imagen 5" />
+          <img src="./img/kremlin.jpg" alt="Imagen 6" />
+          <img src="./img/hotel1.jpeg" alt="Imagen 7" />
+          <img src="./img/praia.jpeg" alt="Imagen 8" />
+          <img src="./img/nyc.jpeg" alt="Imagen 9" />
+          <img src="./img/hotel3.jpeg" alt="Imagen 10" />
+
+          <button class="carousel-btn left">&#10094;</button>
+          <button class="carousel-btn right">&#10095;</button>
+        </section>
+    
+        <section>
+          <h2 class="section-title">Descripcion bla bla bla</h2>
         </section>
 
- 
 
-    </main>
+        <!-- Booking -->
+<section class="booking-section">
+  <div class="container">
+    <form class="booking-form">
+      <select name="destination">
+        <option selected>Destino</option>
+        <option value="1">Destino 1</option>
+        <option value="2">Destino 2</option>
+        <option value="3">Destino 3</option>
+      </select>
+      <input type="date" name="departure" placeholder="Fecha de salida" />
+      <input type="date" name="return" placeholder="Fecha de regreso" />
+      <select name="duration">
+        <option selected>Duración</option>
+        <option value="1">3 días</option>
+        <option value="2">7 días</option>
+        <option value="3">14 días</option>
+      </select>
+      <button type="submit" class="btn-book">Buscar</button>
+    </form>
+  </div>
+</section>
 
-    <footer>
-        <a href=""><img class="logo" id="logo-footer" src="./img/" alt="Logo de la pagina pq se rompio :( )"> </a>
+<!-- About -->
+<section class="about-section">
+  <div class="container about-grid">
+    <div class="about-img">
+      <img src="img/about-traveler.jpeg" alt="About Image" />
+    </div>
+    <div class="about-text">
+      <h2>Sobre Nosotros</h2>
+      <p>Ofrecemos los mejores paquetes turísticos al mejor precio. Desde aventuras inolvidables hasta escapadas románticas, adaptamos tu experiencia a tu presupuesto y tus deseos.</p>
+      <div class="about-gallery">
+        <img src="img/about-1.jpg" alt="About 1" />
+        <img src="img/about-2.jpg" alt="About 2" />
+      </div>
+      <a href="#" class="btn-book">Reservar Ahora</a>
+    </div>
+  </div>
+</section>
+
+      </main>
+    
+      <footer class="footer">
         <h3>Contactanos</h3>
         <ul>
-            <li>nosotros@gmail.com</li>
-            <li>Paula: 29123124123</li>
-            <li>Santi: 2912321421</li>
-            <li>Lula: 2912312323</li>
-            <li>Caste: 2984434234</li>
-            
+          <li>nosotros@gmail.com</li>
+          <li>Paula: 29123124123</li>
+          <li>Santi: 2912321421</li>
+          <li>Lula: 2912312323</li>
+          <li>Caste: 2984434234</li>
         </ul>
-    </footer>
-<script src="./js/carrusel.js"></script>
+      </footer>  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/carrusel.js"></script>
 </body>
 </html>
