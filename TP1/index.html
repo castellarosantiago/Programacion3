@@ -1,203 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Traveler Agency</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="./img/icon-park--vacation.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" />
+
+  <!-- Estilos del template -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-    <header>
-        <a href=""><img class="logo" id="logo-header" src="./img/" alt="Logo de la pagina pq se rompio :( )"> </a>
+    <div class="topbar">
+        <div class="container">
+          <div>
+            <i class="fa fa-envelope"></i> technova@gmail.com
+            <span> | </span>
+            <i class="fa fa-phone-alt"></i> +012 345 6789
+          </div>
+          <div>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    
+      <header class="navbar">
+        <a href="#" class="logo">Traveler</a>
         <nav>
-            <ul>
-                <li><a href="">JAHSJ</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-            </ul>
+          <a href="#">Precios</a>
+          <a href="#">Contacto</a>
+          <a href="#">Sobre Nosotros</a>
+          <a href="#">Agenda tu Viaje!</a>
         </nav>
-    </header>
+      </header>
+    
+      <main>
+        <section class="hero-carousel">
+          <img src="./img/aerea.jpg" alt="Imagen 1" />
+          <img src="./img/japanAlley.jpg" alt="Imagen 2" />
+          <img src="./img/boat.jpg" alt="Imagen 3" />
+          <img src="./img/blue-stuff.jpg" alt="Imagen 4" />
+          <img src="./img/sphynx.jpg" alt="Imagen 5" />
 
-    <main>
-        
-        <section class="home">
-            <div class="home-text"> Descripcion bla bla bla</div>
-            <div class="carrusel">
-            <div class="contenedor-del-carrusel">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-            </div>
-            <button type="button" class="boton-carrusel" id="next"></button>
-            <button type="button" class="boton-carrusel" id="prev"></button>
-            </div>
+
+          <button class="carousel-btn left">&#10094;</button>
+          <button class="carousel-btn right">&#10095;</button>
+        </section>
+    
+        <section>
+          <h2 class="section-title">Descripcion bla bla bla</h2>
         </section>
 
-        <section class="servicios">
-            <div class="card">
-                <img scr="" alt="">
-                <h2></h2>
-                <p></p>
-                <a href=""><button></button></a>
-            </div> 
-            <div class="card">
-                <img src="">
-                <h2></h2>
-                <p></p>
-                <a href=""><button></button></a>
-            </div>
 
+        <!-- Booking -->
+<section class="booking-section">
+  <div class="container">
+    <form class="booking-form">
+      <select name="destination">
+        <option selected>Destino</option>
+        <option value="1">Destino 1</option>
+        <option value="2">Destino 2</option>
+        <option value="3">Destino 3</option>
+      </select>
+      <input type="date" name="departure" placeholder="Fecha de salida" />
+      <input type="date" name="return" placeholder="Fecha de regreso" />
+      <select name="duration">
+        <option selected>Duración</option>
+        <option value="1">3 días</option>
+        <option value="2">7 días</option>
+        <option value="3">14 días</option>
+      </select>
+      <button type="submit" class="btn-book">Buscar</button>
+    </form>
+  </div>
+</section>
 
-            <div class="card">
-                <img src="" alt="">
-                <h2></h2>
-                <p></p>
-                <a href="">
-                    <button></button>
-                </a>
-            </div>
+<!-- About -->
+<section class="about-section">
+  <div class="container about-grid">
+    <div class="about-img">
+      <img src="img/about-traveler.jpeg" alt="About Image" />
+    </div>
+    <div class="about-text">
+      <h2>Sobre Nosotros</h2>
+      <p>Ofrecemos los mejores paquetes turísticos al mejor precio. Desde aventuras inolvidables hasta escapadas románticas, adaptamos tu experiencia a tu presupuesto y tus deseos.</p>
+      <div class="about-gallery">
+        <img src="img/about-1.jpg" alt="About 1" />
+        <img src="img/about-2.jpg" alt="About 2" />
+      </div>
+      <a href="#" class="btn-book">Reservar Ahora</a>
+    </div>
+  </div>
+</section>
 
-            <div class="card">
-            <img src="" alt="">
-            <h2></h2>
-            <p></p>
-            <a href="">
-                <button></button>
-            </a>
-            </div>
-            
-            <div class="card">
-                <img scr="" alt="">
-                <h2></h2>
-                <h3></h3>
-                <p></p>
-                <a href="">
-                    <button></button>
-                </a>     
-            </div>
-            
-            
-            <div class="card">
-            <img scr="" alt="">
-            <h2></h2>
-            <h3></h3>
-            <p></p>
-            <a href="">
-                <button></button>
-            </a>   
-            </div>
-            
-            
-            <div class="card"></div>
-
-            <div class="card">
-                <img src="" alt="imagen">
-                <h2></h2>
-                <h3></h3>
-                <p></p>
-
-                <a href="">
-                <button>Accion a determinar</button>
-                </a>
-                
-            </div>
-            <div class="card">
-
-                <img src="" alt="imagen">
-                <h2></h2>
-                <h3></h3>
-                <p></p>
-
-                <a href="">
-                <button>Accion a determinar</button>
-                </a>
-            </div>
-
-        </section>
-
-        <section class="galeria">
-            
-            <div class="contenedor-grid-galeria">
-                <h2>Esta es la galeria de nuestro laburo</h2>
-                <div class="galeria-grid">
-                    <div class="imagen1">
-                        <a href="">
-                            <img src="" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                    <div class="imagen2">
-                        <a href="">
-                            <img src="./img/" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                    <div class="imagen3">
-                        <a href="">
-                            <img src="" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                    <div class="imagen4">
-                        <a href="">
-                            <img src="" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                    <div class="imagen5">
-                        <a href="">
-                            <img src="" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                    <div class="imagen6">
-                        <a href="">
-                            <img src="" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                    <div class="imagen7">
-                        <a href="">
-                            <img src="" alt="imagen">
-                            <h3></h3>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-        </section>
-
-        <section class="contacto">
-            <div class="contenedor-contacto">
-                <h2>CONTACTO</h2>
-                <form class="formulario-contacto">
-                    <div class="informacion">
-                        <label for="email">Email</label>
-                        <input type="email" id="email">
-                    </div>
-
-
-
-                </form>
-
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <a href=""><img class="logo" id="logo-footer" src="./img/" alt="Logo de la pagina pq se rompio :( )"> </a>
+      </main>
+    
+      <footer class="footer">
         <h3>Contactanos</h3>
         <ul>
-            <li>nosotros@gmail.com</li>
-            <li>Paula: 29123124123</li>
-            <li>Santi: 2912321421</li>
-            <li>Lula: 2912312323</li>
-            <li>Caste: 2984434234</li>
-            
+          <li>technova@gmail.com</li>
+          <li>Paula: 29123124123</li>
+          <li>Santi: 2912321421</li>
+          <li>Lula: 2912312323</li>
+          <li>Caste: 2984434234</li>
         </ul>
-    </footer>
-
+      </footer>  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/carrusel.js"></script>
 </body>
 </html>

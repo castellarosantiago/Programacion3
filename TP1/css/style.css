@@ -1,0 +1,232 @@
+/* === VARIABLES GLOBALES === */
+:root {
+  --primary-color: #28a745;
+  --dark-color: #212529;
+  --light-color: #f8f9fa;
+  --text-color: #333;
+  --font-main: 'Poppins', sans-serif;
+}
+
+/* === RESETEO BÁSICO === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+/* === TOPBAR === */
+.topbar {
+  background-color: var(--light-color);
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.topbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.topbar i {
+  margin-right: 6px;
+}
+
+.topbar a {
+  color: var(--primary-color);
+  margin: 0 5px;
+  text-decoration: none;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background-color: white;
+  padding: 20px 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.navbar nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: var(--dark-color);
+  font-weight: 500;
+}
+
+.navbar nav a:hover {
+  color: var(--primary-color);
+}
+
+/* === HERO CAROUSEL === */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Altura adaptable a pantalla */
+  overflow: hidden;
+}
+
+.hero-carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit:scale-down; /* Recorta y ajusta */
+  display: none;
+}
+
+.hero-carousel img.active {
+  display: block;
+}
+
+
+/* Botones del carrusel */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+
+.carousel-btn.right {
+  right: 10px;
+}
+
+/* === SECTION TITLE === */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 40px 0;
+  color: var(--dark-color);
+}
+
+/* === FOOTER === */
+.footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer h3 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer li {
+  margin-bottom: 10px;
+}
+
+/* === BOOKING SECTION === */
+.booking-section {
+  background-color: var(--light-color);
+  padding: 40px 20px;
+}
+
+.booking-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.booking-form select,
+.booking-form input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 180px;
+}
+
+.btn-book {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-book:hover {
+  background-color: #218838;
+}
+
+/* === ABOUT SECTION === */
+.about-section {
+  padding: 60px 20px;
+  background-color: white;
+}
+
+.about-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-img img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.about-text {
+  max-width: 500px;
+}
+
+.about-text h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  margin-bottom: 20px;
+}
+
+.about-gallery {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.about-gallery img {
+  width: 48%;
+  border-radius: 5px;
+}
+
