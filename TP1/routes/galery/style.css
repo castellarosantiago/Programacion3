@@ -1,0 +1,140 @@
+
+.contenedor-galeria-grid {
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff75;
+  margin-top: 200px;
+}
+
+
+.contenedor-galeria-grid h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.8rem;
+  color: black;
+  text-align: center;
+  font-style:normal;
+  font-weight: bolder;
+
+}
+
+.contenedor-galeria-grid h4 {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1.4rem;
+  letter-spacing: 5px;
+  font-weight: bold;
+  text-align: center;
+  color: #7AB730;
+}
+
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: minmax(100px, auto);
+  gap: 10px;
+  padding: 10px;
+  background-color: rgba(216, 233, 216, 0.384);
+  border: 2px solid rgba(0, 0, 0, 0.178);
+  border-radius: 10px;
+}
+
+
+.galeria-grid > div {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  border: 1px solid #3c423e93;
+  border-radius: 10px;
+}
+
+
+.galeria-grid a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+
+.galeria-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.galeria-grid h3, span {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  height: 120%; 
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0px;
+  padding-bottom: 50px;
+  text-align: center;
+  border-radius: 10px 10px 0px 0px;
+  z-index: 1;
+  transition: background-color 0.5s ease-in;
+  transition: transform 0.3s ease-in;
+}
+.galeria-grid a:hover h3,span {
+  background-color: rgba(0, 0, 0, 0.096);
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+  transform: scale(1.1);
+  
+}
+
+
+.imagen1 {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+}
+
+.imagen2 {
+  grid-row: 1 / 3;
+  grid-column: 2 / 3;
+}
+
+.imagen3 {
+  grid-row: 1 / 3;
+  grid-column: 3 / 4;
+}
+
+.imagen4 {
+  grid-row: 3 / 5;
+  grid-column: 1 / 2;
+}
+
+.imagen5 {
+  grid-row: 3 / 5;
+  grid-column: 2 / 3;
+}
+
+.imagen6 {
+  grid-row: 3 / 5;
+  grid-column: 3 / 4;
+}
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+  .galeria-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .galeria-grid > div {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
