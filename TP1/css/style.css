@@ -230,163 +230,84 @@ body {
   border-radius: 5px;
 }
 
+
 /* === GALERÍA === */
 
-.contenedor-galeria-grid {
-  margin: 20px;
-  padding: 20px;
-  background-color: #ffffff75;
-  margin-top: 200px;
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  grid-template-rows: repeat(2, auto); /* 2 filas */
+  gap: 20px; /* Espaciado entre las tarjetas */
+  padding: 10px;
 }
 
+.galeria-grid > div {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.galeria-grid > div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.galeria-grid img {
+  width: 100%;
+  height: 100%; /* La imagen ocupa toda la tarjeta */
+  object-fit: cover; /* Ajusta la imagen para que cubra el espacio sin deformarse */
+}
+
+/* Estilo para el título de la galería */
 .contenedor-galeria-grid h2 {
   font-family: "Poppins", sans-serif;
-  font-size: 2.8rem;
-  color: black;
+  font-size: 3rem; /* Tamaño más grande */
+  color: var(--dark-color);
   text-align: center;
-  font-style:normal;
-  font-weight: bolder;
-
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombreado */
 }
 
-/* Ajustar el texto en las casillas del grid */
-.galeria-grid a h3, .galeria-grid a span {
+.galeria-grid h3,
+.galeria-grid span {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: white;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   font-family: "Poppins", sans-serif;
   text-align: center;
   z-index: 2;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.galeria-grid a:hover h3, .galeria-grid a:hover span {
-  transform: translate(-50%, -50%) scale(1.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-.contenedor-galeria-grid h4 {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 1.4rem;
-  letter-spacing: 5px;
-  font-weight: bold;
-  text-align: center;
-  color: #7AB730;
-}
-
-
-.galeria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: minmax(100px, auto);
-  gap: 10px;
-  padding: 10px;
-  background-color: rgba(216, 233, 216, 0.384);
-  border: 2px solid rgba(0, 0, 0, 0.178);
-  border-radius: 10px;
-}
-
-
-.galeria-grid > div {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  border: 1px solid #3c423e93;
-  border-radius: 10px;
-}
-
-
-.galeria-grid a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-
-.galeria-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.galeria-grid h3, span {
-  position: absolute;
-  top: -30px;
-  left: 0;
-  width: 100%;
-  height: 120%; 
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
+.galeria-grid h3 {
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 1.5rem;
-  font-weight: bold;
-  padding: 0px;
-  padding-bottom: 50px;
-  text-align: center;
-  border-radius: 10px 10px 0px 0px;
-  z-index: 1;
-  transition: background-color 0.5s ease-in;
-  transition: transform 0.3s ease-in;
-}
-.galeria-grid a:hover h3,span {
-  background-color: rgba(0, 0, 0, 0.096);
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-  transform: scale(1.1);
-  
 }
 
-
-.imagen1 {
-  grid-row: 1 / 3;
-  grid-column: 1 / 2;
+.galeria-grid span {
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
 }
 
-.imagen2 {
-  grid-row: 1 / 3;
-  grid-column: 2 / 3;
+.galeria-grid > div:hover h3,
+.galeria-grid > div:hover span {
+  opacity: 1;
 }
-
-.imagen3 {
-  grid-row: 1 / 3;
-  grid-column: 3 / 4;
-}
-
-.imagen4 {
-  grid-row: 3 / 5;
-  grid-column: 1 / 2;
-}
-
-.imagen5 {
-  grid-row: 3 / 5;
-  grid-column: 2 / 3;
-}
-
-.imagen6 {
-  grid-row: 3 / 5;
-  grid-column: 3 / 4;
-}
-
-
-
-
-
-
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .galeria-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
   }
+}
 
-  .galeria-grid > div {
-    grid-column: auto !important;
-    grid-row: auto !important;
+@media (max-width: 480px) {
+  .galeria-grid {
+    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
   }
 }
 /* === SERVICIOS === */
