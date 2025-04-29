@@ -1,4 +1,4 @@
-document.getElementById("userForm").addEventListener("submit", function (event) {
+document.getElementById("form-button").addEventListener("click", function (event) {
     event.preventDefault(); // Evita el envío del formulario
 
     // Obtener los valores de los campos

@@ -1,9 +1,9 @@
 const lista = document.getElementById("lista");
 const formulario = document.getElementById("formulario");
-const input = document.getElementById("inputt");
+const input = document.getElementById("form-button");
 
 // Crea un li con el texto ingresado por el usuario
-formulario.addEventListener("submit", function(e){
+formulario.addEventListener("click", function(e){
     e.preventDefault();
     
     const inputUsuario = input.value.trim();
