@@ -1,0 +1,77 @@
+/* === VARIABLES === */
+@import url(/css/style.css);
+
+
+/* === CONTACTO === */
+.contenedor-contacto {
+    background-color: var(--light-color);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .contenedor-contacto h4 {
+    font-family: var(--font-main);
+    font-size: 1rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .contenedor-contacto h2 {
+    font-family: var(--font-main);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+  }
+  
+  .formulario-contacto .informacion {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .formulario-contacto input,
+  .formulario-contacto textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-family: var(--font-main);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+  
+  .formulario-contacto textarea {
+    resize: vertical;
+  }
+  
+  .formulario-contacto button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    font-size: 18px;
+    font-family: var(--font-main);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .formulario-contacto button:hover {
+    background-color: #218838;
+  }
+  
+  @media (max-width: 480px) {
+    .contenedor-contacto {
+      padding: 20px;
+    }
+  
+    .formulario-contacto input,
+    .formulario-contacto textarea {
+      font-size: 14px;
+    }
+  }
+  
