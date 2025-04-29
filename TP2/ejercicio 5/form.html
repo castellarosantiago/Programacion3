@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Formularios</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+ <form id="userForm">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required>
+    <div id="nameError" class="error"></div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <div id="emailError" class="error"></div>
+
+    <label for="age">Edad:</label>
+    <input type="text" id="age" name="age" required>
+    <div id="ageError" class="error"></div>
+
+    <button type="submit">Enviar</button>
+ </form>  
+
+ <script src="form.js"></script>
+</body>
+</html>

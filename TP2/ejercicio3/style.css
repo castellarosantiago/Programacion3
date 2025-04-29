@@ -1,0 +1,13 @@
+.resaltado{
+    background-color: yellow;
+    font-weight: bold;
+}
+.oculto{
+    display: none;
+}
+.parrafo{
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    margin-right: 93%;
+
+}
