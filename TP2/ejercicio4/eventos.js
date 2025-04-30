@@ -13,6 +13,6 @@ formulario.addEventListener("click", function(e){
 
 // Marca como completadas las tareas donde el usuario haga click
     lista.addEventListener("click", (e) => {
-        e.target.classList.add("completado");
+        e.target.classList.toggle("completado");
     }); 
 });
