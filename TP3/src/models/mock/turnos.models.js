@@ -49,6 +49,30 @@ class TurnosModel {
       }
     });
 
-    
+
   }
+
+  getAllTurnos(){
+    return new Promise((resolve, reject)=>{
+        resolve(this.data);
+    });
+  }
+
+getTurnoById(id){
+    return new Promise((resolve, reject)=>{
+        try{
+            const identificadorTurno = Number(id);
+            const turnoEncontrado = this.data.find((t)=>t.idPaciente=== identificadorTurno);
+            if(!turnoEncontrado){
+                throw new Error("el id es incorrecto");
+            }
+            resolve(turnoEncontrado);
+        }catch(error){
+            reject(error);
+        }
+    });
 }
+
+}
+
+module.exports = new TurnosModel
