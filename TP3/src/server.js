@@ -1,10 +1,11 @@
 const  express = require('express');
 const  dotenv = require('dotenv');
 
-const rutaPacientes = require('./routes/pacientes.route.js')
+const rutaPacientes = require('./routes/pacientes.route.js');
+const rutaTurnos = require('./routes/turnos.route.js')
 const home = require('./routes/home.routes.js');
 const morgan = require('morgan');
-dotenv.config()
+dotenv.config();
 
 class Server {
   constructor (template=process.env.TEMPLATE || 'ejs') {
@@ -14,7 +15,7 @@ class Server {
     //this.cors()
     this.engine(template)
     this.rutas()
- 
+
     
   }
 
@@ -43,9 +44,24 @@ class Server {
   rutas () {
     this.app.use('/api/v1/pacientes', rutaPacientes)
     this.app.use('/',home)
- 
-    // aca van las otras rutas
 
+    // aca van las otras rutas
+    this.app.use('/api/v1/turnos/:idPaciente', rutaTurnos)
+    //this.app.use('')
+    
+/*
+Consultar turnos por identificador:
+GET /api/v1/turnos/:idPaciente
+
+Cancelar un turno:
+DELETE /api/v1/turnos/:idTurno
+
+Modificar un Turno:
+PUT /api/v1/turnos/:idTurno
+
+Cargar un nuevo turno:
+POST /api/v1/turnos
+*/
   }
 
   listen () {
