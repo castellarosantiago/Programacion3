@@ -71,7 +71,7 @@ class TurnosModel {
 mostrarListaTurnos(){
   return new Promise((resolve, reject)=>{
     resolve(this.data);
-    
+
   })
 }
 
