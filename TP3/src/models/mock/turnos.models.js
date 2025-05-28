@@ -1,5 +1,6 @@
 const Turno = require("./../mock/entities/turnos.entity.js");
 const Config = require("./../../config/config.js");
+const turnosController = require("../../controllers/API/turnos.controller.js");
 const jwt = requite("jsonwebtoken");
 
 class TurnosModel {
@@ -8,10 +9,78 @@ class TurnosModel {
     this.id = 1;
   }
 
-  async getTurnosByPaciente(idPaciente){
-    return this.turnos.filter(turno => turno.idPaciente === Number(idPaciente))
+  async getTurnosByPaciente(idPaciente) {
+    return new Promise((resolve, reject) => {
+      try {
+        const turno = this.data.find((t) => t.idPaciente === idPaciente);
+
+        if (turno === null) {
+          throw new Error("Paciente no encontrado");
+        }
+        resolve(turno);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
+  crearNuevoTurno(turno) {
+    return new Promise((resolve, reject) => {
+      try {
+        turno.id = this.id;
+        this.id++;
+
+        resolve(turno);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  cancelarTurno(id) {
+    return new Promise((resolve, reject) => {
+      try {
+        const turnoEncontrado = this.data.find((t) => t.id === id);
+        if (!turnoEncontrado) {
+          throw new Error("Turno no encontrado, no se pudo cancelar");
+        }
+        pos = this.data.indexOf(turnoEncontrado);
+        this.data.splice(pos, 1);
+        resolve(turnoEncontrado);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  modificarTurno(id){
+    return new Promise((resolve, reject)=>{
+      try{
+        const turnoEncontrado = this.data.find((t) => t.id === id);
+        if (!turnoEncontrado) {
+          throw new Error("Turno no encontrado, no se pudo cancelar");
+        }
+        turnoEncontrado.fecha = turno.fecha;
+        resolve(turnoEncontrado);
+      }catch(error){
+        reject(error);
+      }
+
+    })
+  }
+
+mostrarListaTurnos(){
+  return new Promise((resolve, reject)=>{
+    resolve(this.data);
+    
+  })
 }
+
+
+
+
+}
+
+
 
 /*class TurnosModel {
   constructor() {
@@ -36,7 +105,7 @@ async createTurno(idPaciente, fecha, hora){
   return nuevoTurno;
 }*/
 
-  /*create(turno) {
+/*create(turno) {
     if (!turno) {
       throw new Error("No envio ningun dato");
     } else {
@@ -100,7 +169,7 @@ getTurnoById(id){
         }
     });
 }
-*/
 }
+*/
 
 module.exports = new TurnosModel();
