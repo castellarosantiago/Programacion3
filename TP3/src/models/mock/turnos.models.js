@@ -4,11 +4,39 @@ const jwt = requite("jsonwebtoken");
 
 class TurnosModel {
   constructor() {
-    this.data = [];
+    this.turnos = [];
+    this.id = 1;
+  }
+
+  async getTurnosByPaciente(idPaciente){
+    return this.turnos.filter(turno => turno.idPaciente === Number(idPaciente))
+  }
+}
+
+/*class TurnosModel {
+  constructor() {
+    this.turnos = [];
+    this.id = 1;
     //hardcodear para probar con una instancia de turno despues
   }
 
-  create(turno) {
+async getTurnosByPaciente(idPaciente){
+  return this.turnos.filter(turno => turno.idPaciente === Number(idPaciente));
+}
+
+async deleteTurno(idTurno){
+  const turnoIndex = this.turnos.findIndex(turno=> turno.idTurno === Number(idTurno));
+  if (turnoIndex === -1) throw new Error('Turno no encontrado, verifique el id');
+  return this.turnos.splice(turnoIndex, 1)[0];
+}
+
+async createTurno(idPaciente, fecha, hora){
+  const nuevoTurno = {id:this.id++, idPaciente, fecha, hora}
+  this.turnos.push(nuevoTurno);
+  return nuevoTurno;
+}*/
+
+  /*create(turno) {
     if (!turno) {
       throw new Error("No envio ningun dato");
     } else {
@@ -37,7 +65,7 @@ class TurnosModel {
     new Promise((resolve, reject) => {
       try {
         const turnoEncontrado = this.data.find(
-          (t) => t.idPaciente === Paciente.id
+          (t) => t.id == id
         );
         if (!turnoEncontrado) {
           throw new Error("No se puede cancelar un turno no asignado");
@@ -72,7 +100,7 @@ getTurnoById(id){
         }
     });
 }
-
+*/
 }
 
-module.exports = new TurnosModel
+module.exports = new TurnosModel();

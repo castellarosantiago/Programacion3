@@ -1,0 +1,15 @@
+doctype doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Turnos 
+        link(rel="stylesheet", href="/src/css/styles.css")
+    body 
+
+        h1 Turnos disponibles 
+        ul 
+            each turno in turnos 
+                li = `Paciente: ${turno.idPaciente}, Fecha: ${turno.fecha}, Hora: ${turno.hora}`
+        footer 
+            p © #{new Date().getFullYear()} ClinicalTurnos 
