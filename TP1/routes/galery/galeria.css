@@ -1,0 +1,93 @@
+/* === VARIABLES === */
+@import url(/css/style.css);
+
+
+/* === GALERÍA === */
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas */
+    grid-template-rows: repeat(2, auto);
+    /* 2 filas */
+    gap: 20px;
+    /* Espaciado entre las tarjetas */
+    padding: 10px;
+}
+
+.galeria-grid>div {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-grid>div:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.galeria-grid img {
+    width: 100%;
+    height: 100%;
+    /* La imagen ocupa toda la tarjeta */
+    object-fit: cover;
+    /* Ajusta la imagen para que cubra el espacio sin deformarse */
+}
+
+/* Estilo para el título de la galería */
+.contenedor-galeria-grid h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    /* Tamaño más grande */
+    color: var(--dark-color);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Sombreado */
+}
+
+.galeria-grid h3,
+.galeria-grid span {
+    position: absolute;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    z-index: 2;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.galeria-grid h3 {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+}
+
+.galeria-grid span {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+}
+
+.galeria-grid>div:hover h3,
+.galeria-grid>div:hover span {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columnas en pantallas medianas */
+    }
+}
+
+@media (max-width: 480px) {
+    .galeria-grid {
+        grid-template-columns: 1fr;
+        /* 1 columna en pantallas pequeñas */
+    }
+}
