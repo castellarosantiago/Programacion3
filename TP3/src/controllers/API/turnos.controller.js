@@ -6,26 +6,27 @@ class TurnosController{
     try {
         const {idPaciente} = req.params;
         const turnos = await turnosModel.getTurnosByPaciente(idPaciente);
-        resizeBy.status(200).json(turnos);
+        res.status(200).json(turnos);
     }catch(error){
         res.status(404).json({message: error.message});
     }
 }
 
-async deleteTurno(req, res){
+async cancelarTurno(req, res){
     try{
         const {idTurno} = req.params;
-        const turnoCancelado = await turnosModel.deleteTurno(idTurno);
+        const turnoCancelado = await turnosModel.cancelarTurno(idTurno);
         res.status(200).json({message: 'Turno cancelado', turno: turnoCancelado});
     }catch(error){
         res.status(404).json({message: error.message});
     }
 }
 
-async createTurno(req, res){
+async crearNuevoTurno(req, res){
+
     try{
         const{fecha, hora} = req.body;
-        const nuevoTurno = await turnosModel.createTurno(req.user.userId, fecha, hora);
+        const nuevoTurno = await turnosModel.crearNuevoTurno(req.user.userId, fecha, hora);
         res.status(201).json(nuevoTurno);
     }catch(error){
         res.status(400).json({message: error.message});

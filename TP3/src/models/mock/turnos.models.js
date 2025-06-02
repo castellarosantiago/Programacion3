@@ -1,7 +1,7 @@
 const Turno = require("./../mock/entities/turnos.entity.js");
 const Config = require("./../../config/config.js");
 const turnosController = require("../../controllers/API/turnos.controller.js");
-const jwt = requite("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 class TurnosModel {
   constructor() {
@@ -13,6 +13,7 @@ class TurnosModel {
     return new Promise((resolve, reject) => {
       try {
         const turno = this.data.find((t) => t.idPaciente === idPaciente);
+        
 
         if (turno === null) {
           throw new Error("Paciente no encontrado");
@@ -25,7 +26,10 @@ class TurnosModel {
   }
   crearNuevoTurno(turno) {
     return new Promise((resolve, reject) => {
+
       try {
+        const turnoDisponible = this.data.find((t) => t.id === id);
+        
         turno.id = this.id;
         this.id++;
 
@@ -71,16 +75,12 @@ class TurnosModel {
 mostrarListaTurnos(){
   return new Promise((resolve, reject)=>{
     resolve(this.data);
-
-  })
+  });
 }
 
 
 
-
 }
-
-
 
 /*class TurnosModel {
   constructor() {
