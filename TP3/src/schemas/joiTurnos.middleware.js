@@ -22,16 +22,13 @@ if (resultado.error) {
  */
 
 const Joi = require('joi');
+const { validate } = require('../middlewares/joiValidate')
 
-const validarTurno = (req, res, next) => {
-  const schema = Joi.object({
-    fecha: Joi.date().required(),
-    hora: Joi.string().required()
-  });
+const turnoSchema = Joi.object({
+  fecha: Joi.date().required, 
+  hora: Joi.string().required()
+});
 
-  const {error} = schema.validate(req.body);
-  if(error) return res.status(400).json({message: error.details[0].message});
-  next();
-};
+const validarTurno = validate(turnoSchema);
 
 module.exports = {validarTurno};

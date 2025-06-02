@@ -4,8 +4,8 @@ const {home} = require('../controllers/home/home.controller.js')
 const rutaHome = Router();
 rutaHome.get('/', home);
 
-const { renderTurnos } = require('../controllers/local/turnos.controller.js');
-rutaHome.get('/turnos', renderTurnos);
+const { renderizarTurnos } = require('../controllers/local/turnos.controller.js');
+rutaHome.get('/turnos', renderizarTurnos);
 //Otras rutas CRUD
 /*
 Consultar turnos por identificador:
