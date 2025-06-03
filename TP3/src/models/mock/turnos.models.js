@@ -72,15 +72,21 @@ class TurnosModel {
     })
   }
 
-mostrarListaTurnos(){
-  return new Promise((resolve, reject)=>{
-    resolve(this.data);
-  });
+  mostrarListaTurnos(){
+    return Promise.resolve(this.turnos);
+    };
+
+  getTurnosDisponibles(){
+    return Promise.resolve(this.turnos.filter(t => t.idPaciente == null));
+  }
+  
+  getTurnosDePaciente(idPaciente){
+    return Promise.resolve(this.turnos.filter(t => t.idPaciente === idPaciente));
+  }
 }
 
 
 
-}
 
 /*class TurnosModel {
   constructor() {

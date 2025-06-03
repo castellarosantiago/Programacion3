@@ -1,4 +1,5 @@
 const Persona = require("./../mock/entities/paciente.entity.js");
+const turnosModel = require("./turnos.models.js")
 const Config = require("./../../config/config.js");
 const jwt = require("jsonwebtoken");
 class PacientesModel {
@@ -139,8 +140,15 @@ class PacientesModel {
          reject(error)
        }
       
-     })
+     });
+  }
+
+  getTurnosDePaciente(idPaciente, turnosModel){
+    return turnosModel.getTurnosDePaciente(idPaciente);
+    
   }
 }
+
+
 
 module.exports = new PacientesModel();
