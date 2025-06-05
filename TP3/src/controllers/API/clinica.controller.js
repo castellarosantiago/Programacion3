@@ -31,6 +31,16 @@ class ClinicaController{
     }
 
     async reservarTurnoDisponible(req, res){
-        try{}catch(error)
+        try{}catch{(error)
     }
+}
+
+
+async borrarPacientes (req, res){
+    try{
+        
+    }catch(error){
+
+    }
+}
 }

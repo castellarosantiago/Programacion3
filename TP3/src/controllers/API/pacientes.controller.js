@@ -20,10 +20,10 @@ class PacientesController {
     }
   }
 
-  async list(req, res) {
+  async getAllPacientes(req, res) {
     res.status(200).json(await pacientesModel.list());
   }
-  async create(req, res) {
+  async crearPaciente(req, res) {
     const { dni, nombre, apellido, email } = req.body;
 
     const nuevoPaciente = new Paciente(dni, nombre, apellido, email);
@@ -31,7 +31,7 @@ class PacientesController {
     const info = await pacientesModel.create(nuevoPaciente);
     res.status(200).json(info);
   }
-  delete(req, res) {
+  borrarPaciente(req, res) {
     const id = req.params.id;
 
     const pacienteBorrado = pacientesModel.delete(id)   ;
@@ -44,7 +44,7 @@ class PacientesController {
     );
    
   }
-  update(req, res) {
+  modificarPaciente(req, res) {
     const id = req.params.id;
     const { dni, nombre, apellido, email } = req.body;
     const nuevoPaciente = new Paciente(dni, nombre, apellido, email);

@@ -11,79 +11,46 @@ class TurnosModel {
 
   async getTurnosByPaciente(idPaciente) {
     return new Promise((resolve, reject) => {
-      try {
+      
         const turno = this.data.find((t) => t.idPaciente === idPaciente);
         
 
-        if (turno === null) {
-          throw new Error("Paciente no encontrado");
+        if (turno === undefined) {
+          reject(new Error("Paciente no encontrado"))
+         
+        }else{
+          resolve(turno);
         }
-        resolve(turno);
-      } catch (error) {
-        reject(error);
-      }
+   
     });
   }
   crearNuevoTurno(turno) {
     return new Promise((resolve, reject) => {
 
-      try {
+      
         const turnoDisponible = this.data.find((t) => t.id === id);
-        
-        turno.id = this.id;
-        this.id++;
-
-        resolve(turno);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  cancelarTurno(id) {
-    return new Promise((resolve, reject) => {
-      try {
-        const turnoEncontrado = this.data.find((t) => t.id === id);
-        if (!turnoEncontrado) {
-          throw new Error("Turno no encontrado, no se pudo cancelar");
-        }
-        pos = this.data.indexOf(turnoEncontrado);
-        this.data.splice(pos, 1);
-        resolve(turnoEncontrado);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  modificarTurno(id){
-    return new Promise((resolve, reject)=>{
-      try{
-        const turnoEncontrado = this.data.find((t) => t.id === id);
-        if (!turnoEncontrado) {
-          throw new Error("Turno no encontrado, no se pudo cancelar");
-        }
-        turnoEncontrado.fecha = turno.fecha;
-        resolve(turnoEncontrado);
-      }catch(error){
-        reject(error);
-      }
-
+      if(turnoDisponible== undefined){
+        reject(new Error("Paciente no encontrado"));
+      }else{
+        resolve(turnoDisponible)
+    }
     })
   }
 
+
   mostrarListaTurnos(){
     return Promise.resolve(this.turnos);
-    };
+  }
 
   getTurnosDisponibles(){
-    return Promise.resolve(this.turnos.filter(t => t.idPaciente == null));
+    return Promise.resolve(this.turnos.filter(t => t.idPaciente == undefined));
   }
   
   getTurnosDePaciente(idPaciente){
     return Promise.resolve(this.turnos.filter(t => t.idPaciente === idPaciente));
   }
 }
+
 
 
 

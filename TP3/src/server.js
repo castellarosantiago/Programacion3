@@ -43,6 +43,7 @@ class Server {
 
     // aca van las otras rutas
     this.app.use("/api/v1/turnos/", rutaTurnos);
+    
     //this.app.use('')
 
     /*
