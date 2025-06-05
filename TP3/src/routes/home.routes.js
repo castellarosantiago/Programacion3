@@ -3,6 +3,9 @@ const {Router} = require('express');
 const {home} = require('../controllers/home/home.controller.js')
 const rutaHome = Router();
 rutaHome.get('/', home);
+
+const { renderizarTurnos } = require('../controllers/local/turnos.controller.js');
+rutaHome.get('/turnos', renderizarTurnos);
 //Otras rutas CRUD
 /*
 Consultar turnos por identificador:

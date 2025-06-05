@@ -1,4 +1,5 @@
 const Persona = require("./../mock/entities/paciente.entity.js");
+const turnosModel = require("./turnos.models.js")
 const Config = require("./../../config/config.js");
 const jwt = require("jsonwebtoken");
 class PacientesModel {
@@ -102,24 +103,7 @@ class PacientesModel {
     })
     
   }
-  // elimina el cliente con id = id
-  delete(id) {
-    new Promise((resolve,reject)=>{
-      try {
-       const pacienteEncontrado = this.data.find((p) => p.id == id);
-       if(!pacienteEncontrado){
-         throw new Error("el id no es válido");
-       }
-       const pos = this.data.indexOf(pacienteEncontrado);
-       this.data.splice(pos, 1);
-       resolve(pacienteEncontrado); // elimina el elemento de la posición pos del arreglo
-      } catch (error) {
-       reject(error);
-    }
-    })
 
-   
-  }
   // devuelve la lista completa en un arreglo de strings
   list() {
     return new Promise((resolve, reject) => {
@@ -139,8 +123,15 @@ class PacientesModel {
          reject(error)
        }
       
-     })
+     });
+  }
+
+  getTurnosDePaciente(idPaciente, turnosModel){
+    return turnosModel.getTurnosDePaciente(idPaciente);
+    
   }
 }
+
+
 
 module.exports = new PacientesModel();
