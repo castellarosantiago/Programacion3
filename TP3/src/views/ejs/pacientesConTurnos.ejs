@@ -1,0 +1,25 @@
+<!-- filepath: src/views/pacientesConTurnos.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes con Turnos</title>
+</head>
+<body>
+    <h1>Pacientes con Turnos</h1>
+    <ul>
+        <% pacientes.forEach(function(paciente) { %>
+            <li>
+                <strong>Nombre:</strong> <%= paciente.nombre %> <%= paciente.apellido %>
+                <ul>
+                    <% paciente.turnos.forEach(function(turno) { %>
+                        <li>
+                            <strong>Fecha:</strong> <%= turno.fecha %> - <strong>Hora:</strong> <%= turno.hora %>
+                        </li>
+                    <% }); %>
+                </ul>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

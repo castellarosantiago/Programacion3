@@ -1,0 +1,19 @@
+<!-- filepath: src/views/pacientes.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes</title>
+</head>
+<body>
+    <h1>Listado de Pacientes</h1>
+    <ul>
+        <% pacientes.forEach(function(paciente) { %>
+            <li>
+                <strong>Nombre:</strong> <%= paciente.nombre %> <%= paciente.apellido %> <br>
+                <strong>Email:</strong> <%= paciente.email %>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
