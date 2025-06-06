@@ -1,6 +1,6 @@
 const Turno = require("./../mock/entities/turnos.entity.js");
 const Config = require("./../../config/config.js");
-<<<<<<< HEAD
+<<<<<<< .merge_file_AZypiA
 const jwt = requite("jsonwebtoken");
 
 class TurnosModel {
@@ -90,7 +90,7 @@ async createTurno(idPaciente, fecha, hora){
 }*/
 
 /*create(turno) {
->>>>>>> db4b9ee2610cf625e1ab12fbcc42944b53c0943c
+>>>>>>> .merge_file_VXOquv
     if (!turno) {
       throw new Error("No envio ningun dato");
     } else {
@@ -119,11 +119,11 @@ async createTurno(idPaciente, fecha, hora){
     new Promise((resolve, reject) => {
       try {
         const turnoEncontrado = this.data.find(
-<<<<<<< HEAD
+<<<<<<< .merge_file_AZypiA
           (t) => t.idPaciente === Paciente.id
 =======
           (t) => t.id == id
->>>>>>> db4b9ee2610cf625e1ab12fbcc42944b53c0943c
+>>>>>>> .merge_file_VXOquv
         );
         if (!turnoEncontrado) {
           throw new Error("No se puede cancelar un turno no asignado");
@@ -135,7 +135,7 @@ async createTurno(idPaciente, fecha, hora){
       }
     });
 
-<<<<<<< HEAD
+<<<<<<< .merge_file_AZypiA
     
   }
 }
@@ -167,4 +167,4 @@ getTurnoById(id){
 */
 
 module.exports = new TurnosModel();
->>>>>>> db4b9ee2610cf625e1ab12fbcc42944b53c0943c
+>>>>>>> .merge_file_VXOquv

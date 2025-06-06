@@ -1,7 +1,7 @@
 const Identificador = require("./identificador.entity");
 
 class Turno extends Identificador{
-<<<<<<< HEAD
+<<<<<<< .merge_file_VZU2wN
     constructor(fecha, id, idPaciente){
         super(id);
         this.fecha = fecha;
@@ -12,7 +12,7 @@ class Turno extends Identificador{
         this.fecha = fecha;
         this.idPaciente = idPaciente;
         this.estaDisponible = estaDisponible;
->>>>>>> db4b9ee2610cf625e1ab12fbcc42944b53c0943c
+>>>>>>> .merge_file_PH4BLl
     }
 }
 module.exports = Turno;
