@@ -1,6 +1,7 @@
 const {Router} = require('express');
-const{getTurnosByPaciente, deleteTurno,createTurno} = require('../controllers/API/turnos.controller.js');
-const{vertifyTokenMiddleware} = require('../middlewares/verifyToken.middleware.js');
+const{getTurnosByPaciente, cancelarTurno,crearNuevoTurno} = require('../controllers/API/turnos.controller.js');
+const{verifyTokenMiddleware} = require('../middlewares/verifyToken.middleware.js');
+const {validarTurno} = require('../schemas/joiTurnos.middleware');
 const router = Router();
 
 
@@ -8,9 +9,9 @@ const router = Router();
 router.get('/:idPaciente', getTurnosByPaciente);
 
 //cancelar turno
-router.delete('/:idTurno', deleteTurno);
+router.delete('/:idTurno', cancelarTurno);
 
 //sacar turno con auth
-router.post('/', verifyTokenMiddleware, validarTurno, createTurno);
+router.post('/', verifyTokenMiddleware, validarTurno, crearNuevoTurno);
 
 module.exports = router;

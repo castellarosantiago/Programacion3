@@ -1,10 +1,17 @@
 const express = require("express");
 const dotenv = require("dotenv");
 
+<<<<<<< .merge_file_N0O8Pb
+const rutaPacientes = require('./routes/pacientes.route.js');
+const rutaTurnos = require('./routes/turnos.route.js')
+const home = require('./routes/home.routes.js');
+const morgan = require('morgan');
+=======
 const rutaPacientes = require("./routes/pacientes.routes.js");
 const rutaTurnos = require("./routes/turnos.routes.js");
 const home = require("./routes/home.routes.js");
 const morgan = require("morgan");
+>>>>>>> .merge_file_yT5AXp
 dotenv.config();
 
 class Server {
@@ -13,8 +20,15 @@ class Server {
     this.port = process.env.PORT || 3001;
     this.middleware();
     //this.cors()
+<<<<<<< .merge_file_N0O8Pb
+    this.engine(template)
+    this.rutas()
+
+    
+=======
     this.engine(template);
     this.rutas();
+>>>>>>> .merge_file_yT5AXp
   }
 
   /*   cors () {
@@ -37,15 +51,28 @@ class Server {
     this.app.use(morgan("dev"));
   }
 
+<<<<<<< .merge_file_N0O8Pb
+  rutas () {
+    this.app.use('/api/v1/pacientes', rutaPacientes)
+    this.app.use('/',home)
+
+    // aca van las otras rutas
+    this.app.use('/api/v1/turnos/:idPaciente', rutaTurnos)
+    //this.app.use('')
+    
+/*
+=======
   rutas() {
     this.app.use("/api/v1/pacientes", rutaPacientes);
     this.app.use("/", home);
 
     // aca van las otras rutas
     this.app.use("/api/v1/turnos/", rutaTurnos);
+    
     //this.app.use('')
 
     /*
+>>>>>>> .merge_file_yT5AXp
 Consultar turnos por identificador:
 GET /api/v1/turnos/:idPaciente
 

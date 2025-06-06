@@ -1,5 +1,16 @@
 const Turno = require("./../mock/entities/turnos.entity.js");
 const Config = require("./../../config/config.js");
+<<<<<<< .merge_file_AZypiA
+const jwt = requite("jsonwebtoken");
+
+class TurnosModel {
+  constructor() {
+    this.data = [];
+    //hardcodear para probar con una instancia de turno despues
+  }
+
+  create(turno) {
+=======
 const turnosController = require("../../controllers/API/turnos.controller.js");
 const jwt = require("jsonwebtoken");
 
@@ -11,76 +22,49 @@ class TurnosModel {
 
   async getTurnosByPaciente(idPaciente) {
     return new Promise((resolve, reject) => {
-      try {
+      
         const turno = this.data.find((t) => t.idPaciente === idPaciente);
         
 
-        if (turno === null) {
-          throw new Error("Paciente no encontrado");
+        if (turno === undefined) {
+          reject(new Error("Paciente no encontrado"))
+         
+        }else{
+          resolve(turno);
         }
-        resolve(turno);
-      } catch (error) {
-        reject(error);
-      }
+   
     });
   }
   crearNuevoTurno(turno) {
     return new Promise((resolve, reject) => {
 
-      try {
+      
         const turnoDisponible = this.data.find((t) => t.id === id);
-        
-        turno.id = this.id;
-        this.id++;
-
-        resolve(turno);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  cancelarTurno(id) {
-    return new Promise((resolve, reject) => {
-      try {
-        const turnoEncontrado = this.data.find((t) => t.id === id);
-        if (!turnoEncontrado) {
-          throw new Error("Turno no encontrado, no se pudo cancelar");
-        }
-        pos = this.data.indexOf(turnoEncontrado);
-        this.data.splice(pos, 1);
-        resolve(turnoEncontrado);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  modificarTurno(id){
-    return new Promise((resolve, reject)=>{
-      try{
-        const turnoEncontrado = this.data.find((t) => t.id === id);
-        if (!turnoEncontrado) {
-          throw new Error("Turno no encontrado, no se pudo cancelar");
-        }
-        turnoEncontrado.fecha = turno.fecha;
-        resolve(turnoEncontrado);
-      }catch(error){
-        reject(error);
-      }
-
+      if(turnoDisponible== undefined){
+        reject(new Error("Paciente no encontrado"));
+      }else{
+        resolve(turnoDisponible)
+    }
     })
   }
 
-mostrarListaTurnos(){
-  return new Promise((resolve, reject)=>{
-    resolve(this.data);
-  });
+
+  mostrarListaTurnos(){
+    return Promise.resolve(this.turnos);
+  }
+
+  getTurnosDisponibles(){
+    return Promise.resolve(this.turnos.filter(t => t.idPaciente == undefined));
+  }
+  
+  getTurnosDePaciente(idPaciente){
+    return Promise.resolve(this.turnos.filter(t => t.idPaciente === idPaciente));
+  }
 }
 
 
 
-}
+
 
 /*class TurnosModel {
   constructor() {
@@ -106,6 +90,7 @@ async createTurno(idPaciente, fecha, hora){
 }*/
 
 /*create(turno) {
+>>>>>>> .merge_file_VXOquv
     if (!turno) {
       throw new Error("No envio ningun dato");
     } else {
@@ -134,7 +119,11 @@ async createTurno(idPaciente, fecha, hora){
     new Promise((resolve, reject) => {
       try {
         const turnoEncontrado = this.data.find(
+<<<<<<< .merge_file_AZypiA
+          (t) => t.idPaciente === Paciente.id
+=======
           (t) => t.id == id
+>>>>>>> .merge_file_VXOquv
         );
         if (!turnoEncontrado) {
           throw new Error("No se puede cancelar un turno no asignado");
@@ -146,6 +135,11 @@ async createTurno(idPaciente, fecha, hora){
       }
     });
 
+<<<<<<< .merge_file_AZypiA
+    
+  }
+}
+=======
 
   }
 
@@ -173,3 +167,4 @@ getTurnoById(id){
 */
 
 module.exports = new TurnosModel();
+>>>>>>> .merge_file_VXOquv
