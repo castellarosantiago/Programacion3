@@ -396,5 +396,416 @@ router.post('/login', joiPacientesLogin, pacientesViewController.postLogin);
 router.get('/register', pacientesViewsController.getRegister);
 router.post('/register', joiPacientesRegister, pacientesViewsController.postRegister);
 
-router
+router.get('/turnos', verifyTokenMiddleware, pacientesViewsController.getTurnosDisponibles);
+router.get('/mis-turnos', verifyTokenMiddleware, pacientesViewsController.getMisTurnos);
+router.post('/turnos/asignar/:id', verifyTokenMiddleware, pacientesViewsController.asignarTurno);
+router.post('/turnos/cancelar/:id', verifyTokenMiddleware, pacientesViewsController.cancelarTurno);
+
+router.get('/logout', pacientesViewsController.logout);
+
+module.exports = router;
 ```
+
+### Controlador
+
+```javascript
+// src/controllers/home/pacientes.views.controller.js
+const pacientesModel = require('../../models/mock/pacientes.models.js');
+const turnosModel = require('../../models/mock/turnos.models.js');
+const jwt = require('jsonwebtoken');
+const Config = require('../../config/config.js');
+
+exports.getLogin = (req, res) => {
+  res.render('pacientes-login', { error: null, success: null });
+};
+
+exports.postLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const token = await pacientesModel.validate(email, password);
+    res.cookie('pacienteToken', token, { httpOnly: true });
+    req.session.success = '¡Bienvenido!';
+    res.redirect('/pacientes/turnos');
+  } catch (error) {
+    res.render('pacientes-login', { error: error.message, success: null });
+  }
+};
+
+exports.getRegister = (req, res) => {
+  res.render('pacientes-register', { error: null, success: null });
+};
+
+exports.postRegister = async (req, res) => {
+  try {
+    const { dni, nombre, apellido, email, password } = req.body;
+    await pacientesModel.create({ dni, nombre, apellido, email, password });
+    req.session.success = 'Registro exitoso. Ahora puedes iniciar sesión.';
+    res.redirect('/pacientes/login');
+  } catch (error) {
+    res.render('pacientes-register', { error: error.message, success: null });
+  }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie('pacienteToken');
+  res.redirect('/pacientes/login');
+};
+
+exports.getTurnosDisponibles = async (req, res) => {
+  const turnos = await turnosModel.list();
+  const success = req.session.success;
+  req.session.success = null;
+  res.render('pacientes-turnos', { turnos, user: req.user, error: null, success });
+};
+
+exports.getMisTurnos = async (req, res) => {
+  const turnos = await turnosModel.list();
+  const misTurnos = turnos.filter(t => t.pacienteId === req.user.userId);
+  const success = req.session.success;
+  req.session.success = null;
+  res.render('pacientes-mis-turnos', { turnos: misTurnos, error: null, success });
+};
+
+exports.asignarTurno = async (req, res) => {
+  try {
+    await turnosModel.asignar(req.params.id, req.user.userId);
+    req.session.success = 'Turno asignado correctamente.';
+    res.redirect('/pacientes/turnos');
+  } catch (error) {
+    const turnos = await turnosModel.list();
+    res.render('pacientes-turnos', { turnos, user: req.user, error: error.message, success: null });
+  }
+};
+
+exports.cancelarTurno = async (req, res) => {
+  try {
+    await turnosModel.cancelar(req.params.id, req.user.userId);
+    req.session.success = 'Turno cancelado correctamente.';
+    res.redirect('/pacientes/mis-turnos');
+  } catch (error) {
+    const turnos = await turnosModel.list();
+    const misTurnos = turnos.filter(t => t.pacienteId === req.user.userId);
+    res.render('pacientes-mis-turnos', { turnos: misTurnos, error: error.message, success: null });
+  }
+};
+```
+
+---
+
+## 11. Vistas EJS
+
+Crea los siguientes archivos en `src/views/ejs/`:
+
+### layout.ejs
+
+```ejs
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clínica</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <%- body %>
+  </main>
+</body>
+</html>
+```
+
+### clinica-login.ejs
+
+```ejs
+<%- include('layout') %>
+<h2>Login Clínica</h2>
+<form method="POST" action="/clinica/login">
+  <input name="usuario" placeholder="Usuario" required><br>
+  <input name="password" type="password" placeholder="Contraseña" required><br>
+  <button type="submit">Entrar</button>
+</form>
+<% if (error) { %>
+  <div class="error-msg"><%= error %></div>
+<% } %>
+```
+
+### pacientes-login.ejs
+
+```ejs
+<%- include('layout') %>
+<h2>Login Paciente</h2>
+<form method="POST" action="/pacientes/login">
+  <input name="email" placeholder="Email" required><br>
+  <input name="password" type="password" placeholder="Contraseña" required><br>
+  <button type="submit">Entrar</button>
+</form>
+<% if (success) { %>
+  <div class="success-msg"><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div class="error-msg"><%= error %></div>
+<% } %>
+<a href="/pacientes/register">Registrarse</a>
+```
+
+### pacientes-register.ejs
+
+```ejs
+<%- include('layout') %>
+<h2>Registro Paciente</h2>
+<form method="POST" action="/pacientes/register">
+  <input name="dni" placeholder="DNI" required><br>
+  <input name="nombre" placeholder="Nombre" required><br>
+  <input name="apellido" placeholder="Apellido" required><br>
+  <input name="email" placeholder="Email" required><br>
+  <input name="password" type="password" placeholder="Contraseña" required><br>
+  <button type="submit">Registrarse</button>
+</form>
+<% if (success) { %>
+  <div class="success-msg"><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div class="error-msg"><%= error %></div>
+<% } %>
+<a href="/pacientes/login">Volver al login</a>
+```
+
+### pacientes-turnos.ejs
+
+```ejs
+<%- include('layout') %>
+<h2>Turnos Disponibles</h2>
+<% if (success) { %>
+  <div class="success-msg"><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div class="error-msg"><%= error %></div>
+<% } %>
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Hora</th>
+    <th>Acción</th>
+  </tr>
+  <% turnos.forEach(turno => { %>
+    <tr>
+      <td><%= turno.fecha %></td>
+      <td><%= turno.hora %></td>
+      <td>
+        <% if (!turno.pacienteId) { %>
+          <form method="POST" action="/pacientes/turnos/asignar/<%= turno.id %>">
+            <button type="submit">Asignar</button>
+          </form>
+        <% } else if (turno.pacienteId === user.userId) { %>
+          <span>Asignado a vos</span>
+        <% } else { %>
+          Ocupado
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+<a href="/pacientes/mis-turnos">Ver mis turnos</a> | <a href="/pacientes/logout">Cerrar sesión</a>
+```
+
+### pacientes-mis-turnos.ejs
+
+```ejs
+<%- include('layout') %>
+<h2>Mis Turnos</h2>
+<% if (success) { %>
+  <div class="success-msg"><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div class="error-msg"><%= error %></div>
+<% } %>
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Hora</th>
+    <th>Acción</th>
+  </tr>
+  <% turnos.forEach(turno => { %>
+    <tr>
+      <td><%= turno.fecha %></td>
+      <td><%= turno.hora %></td>
+      <td>
+        <form method="POST" action="/pacientes/turnos/cancelar/<%= turno.id %>">
+          <button type="submit">Cancelar</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+<a href="/pacientes/turnos">Ver todos los turnos</a> | <a href="/pacientes/logout">Cerrar sesión</a>
+```
+
+### pacientes.ejs (vista clínica)
+
+```ejs
+<%- include('layout') %>
+<h2>Pacientes</h2>
+<a href="/clinica/pacientes/nuevo">Nuevo Paciente</a>
+<table>
+  <tr>
+    <th>ID</th><th>DNI</th><th>Nombre</th><th>Apellido</th><th>Email</th>
+  </tr>
+  <% pacientes.forEach(p => { %>
+    <tr>
+      <td><%= p.id %></td>
+      <td><%= p.dni %></td>
+      <td><%= p.nombre %></td>
+      <td><%= p.apellido %></td>
+      <td><%= p.email %></td>
+    </tr>
+  <% }) %>
+</table>
+<a href="/clinica/logout">Cerrar sesión</a>
+```
+
+### nuevo-paciente.ejs (vista clínica)
+
+```ejs
+<%- include('layout') %>
+<h2>Nuevo Paciente</h2>
+<form method="POST" action="/clinica/pacientes/nuevo">
+  <input name="dni" placeholder="DNI" required><br>
+  <input name="nombre" placeholder="Nombre" required><br>
+  <input name="apellido" placeholder="Apellido" required><br>
+  <input name="email" placeholder="Email" required><br>
+  <input name="password" placeholder="Password" required type="password"><br>
+  <button type="submit">Crear</button>
+</form>
+<% if (error) { %>
+  <div class="error-msg"><%= error %></div>
+<% } %>
+<a href="/clinica/pacientes">Volver</a>
+```
+
+### turnos.ejs (vista clínica)
+
+```ejs
+<%- include('layout') %>
+<h2>Turnos</h2>
+<table>
+  <tr>
+    <th>ID</th><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Acción</th>
+  </tr>
+  <% turnos.forEach(t => { %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.fecha %></td>
+      <td><%= t.hora %></td>
+      <td>
+        <% if (t.pacienteId) { 
+          const paciente = pacientes.find(p => p.id == t.pacienteId);
+        %>
+          <%= paciente ? paciente.nombre + ' ' + paciente.apellido : 'Desconocido' %>
+        <% } else { %>
+          Libre
+        <% } %>
+      </td>
+      <td>
+        <% if (!t.pacienteId) { %>
+          <form method="POST" action="/clinica/turnos/asignar/<%= t.id %>">
+            <select name="pacienteId" required>
+              <option value="">Asignar a...</option>
+              <% pacientes.forEach(p => { %>
+                <option value="<%= p.id %>"><%= p.nombre %> <%= p.apellido %></option>
+              <% }) %>
+            </select>
+            <button type="submit">Asignar</button>
+          </form>
+        <% } else { %>
+          <form method="POST" action="/clinica/turnos/cancelar/<%= t.id %>">
+            <button type="submit">Cancelar</button>
+          </form>
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+<a href="/clinica/logout">Cerrar sesión</a>
+```
+
+---
+
+## 12. CSS para mensajes y estilo básico
+
+```css
+/* src/css/styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background: #eee;
+}
+.error-msg {
+  color: #fff;
+  background: #e74c3c;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.success-msg {
+  color: #fff;
+  background: #27ae60;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+a {
+  color: #2980b9;
+  text-decoration: none;
+  margin-right: 8px;
+}
+a:hover {
+  text-decoration: underline;
+}
+button {
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #1c5980;
+}
+```
+
+---
+
+## 13. Configuración de JWT
+
+```javascript
+// src/config/config.js
+module.exports = {
+  secreteWord: 'clinicaSecret'
+};
+```
+
