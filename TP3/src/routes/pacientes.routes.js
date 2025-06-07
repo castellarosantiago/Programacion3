@@ -1,31 +1,20 @@
-const {Router} = require('express');
-const {getAllPacientes, crearPaciente, modificarPaciente, borrarPaciente} = require('../controllers/API/pacientes.controller.js');
-const  {verifyTokenMiddleware}  = require('../middlewares/verifyToken.middleware.js');
-const rutaPacientes = Router();
-rutaPacientes.get('/', verifyTokenMiddleware,  getAllPacientes);
-//rutaPacientes.post('/login', login)
-rutaPacientes.post('/',verifyTokenMiddleware, crearPaciente);
-rutaPacientes.put('/:id',verifyTokenMiddleware, modificarPaciente);
+const { Router } = require('express');
+const pacientesViewsController = require('../controllers/pacientes.views.controller.js');
+const { verifyTokenMiddleware } = require('../middlewares/verifyToken.middleware.js');
+const { joiPacientesRegister, joiPacientesLogin } = require('../schemas/joiPacientes.middleware.js');
 
-//Otras rutas CRUD
-/*
-Consultar turnos por identificador:
-GET /api/v1/turnos/:idPaciente
+const router = Router();
 
-Cancelar un turno:
-DELETE /api/v1/turnos/:idTurno
+reouter.get('/login', pacientesViewsController.getLogin);
+router.post('/login', joiPacientesLogin, pacientesViewController.postLogin);
+router.get('/register', pacientesViewsController.getRegister);
+router.post('/register', joiPacientesRegister, pacientesViewsController.postRegister);
 
-Modificar un Turno:
-PUT /api/v1/turnos/:idTurno
+router.get('/turnos', verifyTokenMiddleware, pacientesViewsController.getTurnosDisponibles);
+router.get('/mis-turnos', verifyTokenMiddleware, pacientesViewsController.getMisTurnos);
+router.post('/turnos/asignar/:id', verifyTokenMiddleware, pacientesViewsController.asignarTurno);
+router.post('/turnos/cancelar/:id', verifyTokenMiddleware, pacientesViewsController.cancelarTurno);
 
-Cargar un nuevo turno:
-POST /api/v1/turnos
+router.get('/logout', pacientesViewsController.logout);
 
-
-DIFERENCIA CON LA CLINICA:
-
-El paciente accede solo a los _id propios, 
-y a los _idTurnos que pertenecen a su _id
-*/
-
-module.exports = rutaPacientes;
+module.exports = router;

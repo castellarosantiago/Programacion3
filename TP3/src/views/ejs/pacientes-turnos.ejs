@@ -1,0 +1,41 @@
+<%- include('layout') %>
+    <h2>Turnos Disponibles</h2>
+    <% if (success) { %>
+        <div class="success-msg">
+            <%= success %>
+        </div>
+        <% } %>
+            <% if (error) { %>
+                <div class="error-msg">
+                    <%= error %>
+                </div>
+                <% } %>
+                    <table>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Acción</th>
+                        </tr>
+                        <% turnos.forEach(turno=> { %>
+                            <tr>
+                                <td>
+                                    <%= turno.fecha %>
+                                </td>
+                                <td>
+                                    <%= turno.hora %>
+                                </td>
+                                <td>
+                                    <% if (!turno.pacienteId) { %>
+                                        <form method="POST" action="/pacientes/turnos/asignar/<%= turno.id %>">
+                                            <button type="submit">Asignar</button>
+                                        </form>
+                                        <% } else if (turno.pacienteId===user.userId) { %>
+                                            <span>Asignado a vos</span>
+                                            <% } else { %>
+                                                Ocupado
+                                                <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </table>
+                    <a href="/pacientes/mis-turnos">Ver mis turnos</a> | <a href="/pacientes/logout">Cerrar sesión</a>

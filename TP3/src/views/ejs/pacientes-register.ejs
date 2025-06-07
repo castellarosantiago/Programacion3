@@ -1,0 +1,21 @@
+<%- include('layout') %>
+    <h2>Registro Paciente</h2>
+    <form method="POST" action="/pacientes/register">
+        <input name="dni" placeholder="DNI" required><br>
+        <input name="nombre" placeholder="Nombre" required><br>
+        <input name="apellido" placeholder="Apellido" required><br>
+        <input name="email" placeholder="Email" required><br>
+        <input name="password" type="password" placeholder="Contraseña" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
+    <% if (success) { %>
+        <div class="success-msg">
+            <%= success %>
+        </div>
+        <% } %>
+            <% if (error) { %>
+                <div class="error-msg">
+                    <%= error %>
+                </div>
+                <% } %>
+                    <a href="/pacientes/login">Volver al login</a>

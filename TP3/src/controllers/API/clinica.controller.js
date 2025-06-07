@@ -1,46 +1,44 @@
-const clinicaModel = require("../../models/mock/clinica.model.js");
-const modeloClinica = require("../../models/mock/clinica.model.js");
-const { turnos } = require("../../models/mock/turnos.models.js");
+const pacientesModel = require('../../models/mock/pacientes.models.js');
+const turnosModel = require('../../models/mock/turnos.models.js');
 
-class ClinicaController{
-    async getAllPacientes(req, res){
+class ClinicaController {
+    async vistaPacientes(req, res) {
+        const pacientes = await pacientesModel.list();
+        res.render('pacientes', { pacientes });
+    }
+
+    nuevoPaciente(req, res) {
+        res.render('nuevo-paciente', {error: null});
+    }
+
+    async crearPaciente(req, res) {
+        const {dni, nombre, apellido, email, password } = req.body;
         try{
-            const pacientes = await clinicaModel.getAllPacientes();
-            res.json(pacientes);
+            await pacientesModel.create({dni, nombre, apellido, email, password});
+            res.redirect('/clinica/pacientes');
         }catch(error){
-            res.status(500).json({error : error.message});
+            res.render('nuevo-paciente', { error: error.message });
         }
     }
 
-    async getAllTurnos(req, res){
-        try{
-            const turnos = await clinicaModel.getAllTurnos();
-            res.json(turnos);
-        }catch(error){
-            res.status(500).json({error : error.message});
-        }
+    async vistaTurnos(req, res) {
+        const turnos = await turnosModel.getAllTurnos();
+        const paciente = await pacientesModel.getAllPacientes();
+        res.render('turnos', {turnos, pacientes});
     }
 
-    async getPacientesConTurnos(req, res){
-        try{
-            const pacientes = await clinicaModel.getPacientesConTurnos();
-            res.json(pacientes);
-        }catch(error){
-            res.status(500).json({error : error.message});
-        }
+    async asignarTurno(req, res) {
+        const turnoId = req.params.id;
+        const pacienteId = req.body.pacienteId;
+        await turnosModel.reservarTurnoDisponible(turnoId, pacienteId);
+        res.redirect('/clinica/turnos');
     }
 
-    async reservarTurnoDisponible(req, res){
-        try{}catch{(error)
+    async cancelarTurno(req, res) {
+        const turnoId = req.params.id;
+        await turnosModel.cancelarTurno(turnoId);
+        res.redirect('/clinica/turnos');
     }
 }
 
-
-async borrarPacientes (req, res){
-    try{
-        
-    }catch(error){
-
-    }
-}
-}
+module.exports = new ClinicaController();

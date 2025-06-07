@@ -1,0 +1,16 @@
+<%- include('layout') %>
+    <h2>Nuevo Paciente</h2>
+    <form method="POST" action="/clinica/pacientes/nuevo">
+        <input name="dni" placeholder="DNI" required><br>
+        <input name="nombre" placeholder="Nombre" required><br>
+        <input name="apellido" placeholder="Apellido" required><br>
+        <input name="email" placeholder="Email" required><br>
+        <input name="password" placeholder="Password" required type="password"><br>
+        <button type="submit">Crear</button>
+    </form>
+    <% if (error) { %>
+        <div class="error-msg">
+            <%= error %>
+        </div>
+        <% } %>
+            <a href="/clinica/pacientes">Volver</a>
