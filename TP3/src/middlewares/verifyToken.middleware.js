@@ -14,7 +14,7 @@ const verifyTokenMiddleware = (req, res, next) => {
     } catch(error) {
         res.clearCookie('pacienteToken');
         res.clearCookie('clinicaToken');
-        if(req.originalUrl.startsWith('/clinica')) return res.redirect('clinica/login');
+        if(req.originalUrl.startsWith('/clinica')) return res.redirect('/clinica/login');
         return res.redirect('/pacientes/login');
     }
 };

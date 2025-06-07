@@ -5,8 +5,8 @@ const { joiPacientesRegister, joiPacientesLogin } = require('../schemas/joiPacie
 
 const router = Router();
 
-reouter.get('/login', pacientesViewsController.getLogin);
-router.post('/login', joiPacientesLogin, pacientesViewController.postLogin);
+router.get('/login', pacientesViewsController.getLogin);
+router.post('/login', joiPacientesLogin, pacientesViewsController.postLogin);
 router.get('/register', pacientesViewsController.getRegister);
 router.post('/register', joiPacientesRegister, pacientesViewsController.postRegister);
 

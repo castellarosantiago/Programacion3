@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const coockieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(session({
     secret: 'clinicaSecret',
     resave: false,
-    saveUnitialized: true
+    saveUninitialized: true
 }));
 
 app.set('view engine', 'ejs');

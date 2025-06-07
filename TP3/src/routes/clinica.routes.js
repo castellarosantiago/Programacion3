@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const clinicaCotroller =  require('../controllers/API/clinica.controoller.js');
+const clinicaController = require('../controllers/API/clinica.controller.js');
 const { verifyTokenMiddleware } = require('../middlewares/verifyToken.middleware.js');
 
 const router = Router();

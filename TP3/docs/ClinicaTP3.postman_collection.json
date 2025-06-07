@@ -1,0 +1,130 @@
+{
+  "info": {
+    "name": "Clinica TP3",
+    "_postman_id": "b1e7e2c7-0e7e-4c7e-9e2c-123456789abc",
+    "description": "Colección para probar el sistema de clínica y pacientes TP3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Paciente - Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "email", "value": "antozzisergio@gmail.com", "type": "text" },
+            { "key": "password", "value": "1234", "type": "text" }
+          ]
+        },
+        "url": { "raw": "http://localhost:3000/pacientes/login", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["pacientes", "login"] }
+      }
+    },
+    {
+      "name": "Paciente - Ver turnos disponibles",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Cookie", "value": "pacienteToken={{pacienteToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/pacientes/turnos", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["pacientes", "turnos"] }
+      }
+    },
+    {
+      "name": "Paciente - Sacar turno (ID=1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Cookie", "value": "pacienteToken={{pacienteToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/pacientes/turnos/asignar/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["pacientes", "turnos", "asignar", "1"] }
+      }
+    },
+    {
+      "name": "Paciente - Ver mis turnos",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Cookie", "value": "pacienteToken={{pacienteToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/pacientes/mis-turnos", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["pacientes", "mis-turnos"] }
+      }
+    },
+    {
+      "name": "Paciente - Cancelar turno (ID=1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Cookie", "value": "pacienteToken={{pacienteToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/pacientes/turnos/cancelar/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["pacientes", "turnos", "cancelar", "1"] }
+      }
+    },
+    {
+      "name": "Clinica - Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "usuario", "value": "admin", "type": "text" },
+            { "key": "password", "value": "admin123", "type": "text" }
+          ]
+        },
+        "url": { "raw": "http://localhost:3000/clinica/login", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["clinica", "login"] }
+      }
+    },
+    {
+      "name": "Clinica - Ver todos los turnos",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Cookie", "value": "clinicaToken={{clinicaToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/clinica/turnos", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["clinica", "turnos"] }
+      }
+    },
+    {
+      "name": "Clinica - Asignar turno (ID=2 a paciente 1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Cookie", "value": "clinicaToken={{clinicaToken}}" }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "pacienteId", "value": "1", "type": "text" }
+          ]
+        },
+        "url": { "raw": "http://localhost:3000/clinica/turnos/asignar/2", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["clinica", "turnos", "asignar", "2"] }
+      }
+    },
+    {
+      "name": "Clinica - Cancelar turno (ID=2)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Cookie", "value": "clinicaToken={{clinicaToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/clinica/turnos/cancelar/2", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["clinica", "turnos", "cancelar", "2"] }
+      }
+    },
+    {
+      "name": "Clinica - Ver todos los pacientes",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Cookie", "value": "clinicaToken={{clinicaToken}}" }
+        ],
+        "url": { "raw": "http://localhost:3000/clinica/pacientes", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["clinica", "pacientes"] }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "pacienteToken", "value": "" },
+    { "key": "clinicaToken", "value": "" }
+  ]
+}

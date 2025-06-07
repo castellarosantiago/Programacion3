@@ -41,6 +41,9 @@
                             </select>
                             <button type="submit">Asignar</button>
                         </form>
+                        <form method="POST" action="/clinica/turnos/eliminar/<%= t.id %>" style="display:inline;">
+                            <button type="submit" onclick="return confirm('¿Eliminar turno?')">Eliminar</button>
+                        </form>
                         <% } else { %>
                             <form method="POST" action="/clinica/turnos/cancelar/<%= t.id %>">
                                 <button type="submit">Cancelar</button>
