@@ -33,20 +33,18 @@ class ClinicaController{
     async crearTurnoDisponible(req, res){
         try{
             const{fecha, hora} = req.body;
-            const nuevoTurno = await TurnosModel.crearTurnoDisponible(fecha, hora);
+            const nuevoTurno = await ModeloClinica.crearTurnoDisponible(fecha, hora);
             res.status(201).json(nuevoTurno);
         }catch(error){
             res.status(400).json({message: error.message});
         }
     }
 
-    //////////////////// le pasa los parametros x separado (hora, fecha, id) o el turno completo
     async reservarTurnoDisponible(req, res){
         try{
-            // le pasa el ID del paciente
-            // preguntar
-            const {fecha, hora} = req.body;
-            const nuevoTurno = await TurnosModel.crearNuevoTurno(req.user.userId, fecha, hora);
+            const {fecha, hora, userId, idTurno} = req.body;
+            const turno = { userId, fecha, hora, idTurno };
+            const nuevoTurno = await ModeloClinica.reservarTurnoDisponible(turno);
             res.status(201).json(nuevoTurno);
         }catch(error){
             res.status(400).json({message: error.message});

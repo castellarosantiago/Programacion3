@@ -26,6 +26,12 @@ class ModeloClinica {
       return TurnosModel.crearTurnoDisponible(fecha, hora);
     }
 
+    reservarTurnoDisponible(turno) {
+      return TurnosModel.crearNuevoTurno(turno);
+    }
+
+
+
 }
 
 module.exports = new ModeloClinica();
