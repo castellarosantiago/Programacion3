@@ -22,7 +22,9 @@ app.set('views', path.join(__dirname, 'views', 'ejs'))
 const clinicaAuthRoutes = require('./routes/clinicaAuth.routes.js');
 const clinicaRoutes = require('./routes/clinica.routes.js');
 const pacientesViewsRoutes = require('./routes/pacientes.views.routes.js');
+const homeRoutes = require('./routes/home.routes.js');
 
+app.use('/', homeRoutes);
 app.use('/clinica', clinicaAuthRoutes);
 app.use('/clinica', clinicaRoutes);
 app.use('/pacientes', pacientesViewsRoutes);
