@@ -1,170 +1,44 @@
-const Turno = require("./../mock/entities/turnos.entity.js");
-const Config = require("./../../config/config.js");
-<<<<<<< .merge_file_AZypiA
-const jwt = requite("jsonwebtoken");
-
 class TurnosModel {
-  constructor() {
-    this.data = [];
-    //hardcodear para probar con una instancia de turno despues
-  }
-
-  create(turno) {
-=======
-const turnosController = require("../../controllers/API/turnos.controller.js");
-const jwt = require("jsonwebtoken");
-
-class TurnosModel {
-  constructor() {
-    this.turnos = [];
-    this.id = 1;
-  }
-
-  async getTurnosByPaciente(idPaciente) {
-    return new Promise((resolve, reject) => {
-      
-        const turno = this.data.find((t) => t.idPaciente === idPaciente);
-        
-
-        if (turno === undefined) {
-          reject(new Error("Paciente no encontrado"))
-         
-        }else{
-          resolve(turno);
-        }
-   
-    });
-  }
-  crearNuevoTurno(turno) {
-    return new Promise((resolve, reject) => {
-
-      
-        const turnoDisponible = this.data.find((t) => t.id === id);
-      if(turnoDisponible== undefined){
-        reject(new Error("Paciente no encontrado"));
-      }else{
-        resolve(turnoDisponible)
+    constructor() {
+        this.data = [
+            { id: 1, fecha: '2025-06-10', hora: '10:00', pacienteId: null },
+            { id: 2, fecha: '2025-06-11', hora: '11:00', pacienteId: null }
+        ];
+        this.id = 3;
     }
-    })
-  }
 
-
-  mostrarListaTurnos(){
-    return Promise.resolve(this.turnos);
-  }
-
-  getTurnosDisponibles(){
-    return Promise.resolve(this.turnos.filter(t => t.idPaciente == undefined));
-  }
-  
-  getTurnosDePaciente(idPaciente){
-    return Promise.resolve(this.turnos.filter(t => t.idPaciente === idPaciente));
-  }
-}
-
-
-
-
-
-/*class TurnosModel {
-  constructor() {
-    this.turnos = [];
-    this.id = 1;
-    //hardcodear para probar con una instancia de turno despues
-  }
-
-async getTurnosByPaciente(idPaciente){
-  return this.turnos.filter(turno => turno.idPaciente === Number(idPaciente));
-}
-
-async deleteTurno(idTurno){
-  const turnoIndex = this.turnos.findIndex(turno=> turno.idTurno === Number(idTurno));
-  if (turnoIndex === -1) throw new Error('Turno no encontrado, verifique el id');
-  return this.turnos.splice(turnoIndex, 1)[0];
-}
-
-async createTurno(idPaciente, fecha, hora){
-  const nuevoTurno = {id:this.id++, idPaciente, fecha, hora}
-  this.turnos.push(nuevoTurno);
-  return nuevoTurno;
-}*/
-
-/*create(turno) {
->>>>>>> .merge_file_VXOquv
-    if (!turno) {
-      throw new Error("No envio ningun dato");
-    } else {
-      return turno;
+    async getTurnosByPaciente(idPaciente) {
+        return this.data.filter(t => t.pacienteId == idPaciente);
     }
-    return new Promise((resolve, reject) => {
-      try {
-        turno.id = this.id;
-        this.id++;
-        const turnoEncontrado = this.data.find(
-          (t) => t.idPaciente === Paciente.id
-        );
-        if (turnoEncontrado === null) {
-          this.data.push(turno);
-        } else {
-          throw new Error("El turno ya se ecnuentra asignado");
+
+    async list() {
+        return this.data;
+    }
+
+    // Asignar turno a paciente (solo si está disponible)
+    async asignar(turnoId, pacienteId) {
+        const turno = this.data.find(t => t.id == turnoId);
+        if (turno && !turno.pacienteId) {
+            turno.pacienteId = pacienteId;
+            return turno;
         }
-        resolve(turno);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
+        throw new Error('Turno no disponible');
+    }
 
-  delete(id) {
-    new Promise((resolve, reject) => {
-      try {
-        const turnoEncontrado = this.data.find(
-<<<<<<< .merge_file_AZypiA
-          (t) => t.idPaciente === Paciente.id
-=======
-          (t) => t.id == id
->>>>>>> .merge_file_VXOquv
-        );
-        if (!turnoEncontrado) {
-          throw new Error("No se puede cancelar un turno no asignado");
+    // Cancelar turno (solo si está asignado al paciente)
+    async cancelar(turnoId, pacienteId) {
+        const turno = this.data.find(t => t.id == turnoId && t.pacienteId == pacienteId);
+        if (turno) {
+            turno.pacienteId = null;
+            return turno;
         }
-        const pos = this.data.indexOf(turnoEncontrado);
-        this.data.splice(pos, 1);
-      } catch (error) {
-        reject(error);
-      }
-    });
+        throw new Error('No se puede cancelar este turno');
+    }
 
-<<<<<<< .merge_file_AZypiA
-    
-  }
+    // Para la clínica: ver todos los turnos
+    async getAllTurnos() {
+        return this.data;
+    }
 }
-=======
-
-  }
-
-  getAllTurnos(){
-    return new Promise((resolve, reject)=>{
-        resolve(this.data);
-    });
-  }
-
-getTurnoById(id){
-    return new Promise((resolve, reject)=>{
-        try{
-            const identificadorTurno = Number(id);
-            const turnoEncontrado = this.data.find((t)=>t.idPaciente=== identificadorTurno);
-            if(!turnoEncontrado){
-                throw new Error("el id es incorrecto");
-            }
-            resolve(turnoEncontrado);
-        }catch(error){
-            reject(error);
-        }
-    });
-}
-}
-*/
 
 module.exports = new TurnosModel();
->>>>>>> .merge_file_VXOquv

@@ -1,0 +1,35 @@
+<%- include('layout') %>
+    <h2>Mis Turnos</h2>
+    <% if (success) { %>
+        <div class="success-msg">
+            <%= success %>
+        </div>
+        <% } %>
+            <% if (error) { %>
+                <div class="error-msg">
+                    <%= error %>
+                </div>
+                <% } %>
+                    <table>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Acción</th>
+                        </tr>
+                        <% turnos.forEach(turno=> { %>
+                            <tr>
+                                <td>
+                                    <%= turno.fecha %>
+                                </td>
+                                <td>
+                                    <%= turno.hora %>
+                                </td>
+                                <td>
+                                    <form method="POST" action="/pacientes/turnos/cancelar/<%= turno.id %>">
+                                        <button type="submit">Cancelar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </table>
+                    <a href="/pacientes/turnos">Ver todos los turnos</a> | <a href="/pacientes/logout">Cerrar sesión</a>

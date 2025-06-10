@@ -1,21 +1,56 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <title>Turnos</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    <h1>Turnos disponibles</h1>
-    <ul>
-        <% turnos.forEach(function(turno) { %>
-            <li>
-                Paciente: <%= turno.idPaciente %>, Fecha: <%= turno.fecha %>, Hora: <%= turno.hora %>
-            </li>
-        <% }); %>
-    </ul>
-    <footer>
-        <p>© <%= new Date().getFullYear() %> ClinicalTurnos</p>
-    </footer>
-</body>
-</html>
+<%- include('layout') %>
+    <h2>Turnos</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Paciente</th>
+            <th>Acción</th>
+        </tr>
+        <% turnos.forEach(t=> { %>
+            <tr>
+                <td>
+                    <%= t.id %>
+                </td>
+                <td>
+                    <%= t.fecha %>
+                </td>
+                <td>
+                    <%= t.hora %>
+                </td>
+                <td>
+                    <% if (t.pacienteId) { const paciente=pacientes.find(p=> p.id == t.pacienteId);
+                        %>
+                        <%= paciente ? paciente.nombre + ' ' + paciente.apellido : 'Desconocido' %>
+                            <% } else { %>
+                                Libre
+                                <% } %>
+                </td>
+                <td>
+                    <% if (!t.pacienteId) { %>
+                        <form method="POST" action="/clinica/turnos/asignar/<%= t.id %>">
+                            <select name="pacienteId" required>
+                                <option value="">Asignar a...</option>
+                                <% pacientes.forEach(p=> { %>
+                                    <option value="<%= p.id %>">
+                                        <%= p.nombre %>
+                                            <%= p.apellido %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <button type="submit">Asignar</button>
+                        </form>
+                        <form method="POST" action="/clinica/turnos/eliminar/<%= t.id %>" style="display:inline;">
+                            <button type="submit" onclick="return confirm('¿Eliminar turno?')">Eliminar</button>
+                        </form>
+                        <% } else { %>
+                            <form method="POST" action="/clinica/turnos/cancelar/<%= t.id %>">
+                                <button type="submit">Cancelar</button>
+                            </form>
+                            <% } %>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+    <a href="/clinica/logout">Cerrar sesión</a>

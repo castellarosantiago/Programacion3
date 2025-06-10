@@ -1,5 +1,2 @@
 const Server = require('./server.js')
 
-const server = new Server("ejs");
-
-server.listen();
