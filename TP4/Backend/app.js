@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
-const personaRoutes = require("./routes/personaRoutes");
+const personaRoutes = require("./routes/personas.routes");
 const cors = require("cors");
 
-app.use(cors()); // Permitir conexión con el frontend
+app.use(cors()); // Allow connections from the frontend
 app.use("/api", personaRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
