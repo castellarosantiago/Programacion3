@@ -2,7 +2,7 @@ import TarjetaPersona from './TarjetaPersona';
 
 function ListaTarjetas({ personas }) {
   return (
-    <div className="lista-tarjetas">
+    <div className="cards-container">
       {personas.map(persona => (
         <TarjetaPersona key={persona.id} persona={persona} />
       ))}

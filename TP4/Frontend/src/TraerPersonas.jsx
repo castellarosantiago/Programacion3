@@ -3,35 +3,18 @@ import ListaTarjetas from './ListaTarjetas';
 
 function TraerPersonas() {
   const [personas, setPersonas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    const fetchPersonas = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/personas');
-        if (!response.ok) {
-          throw new Error('Error fetching personas');
-        }
-        const data = await response.json();
+    fetch('http://localhost:3000/api/personas')
+      .then(res => res.json())
+      .then(data => {
         setPersonas(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPersonas();
+        setCargando(false);
+      });
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (cargando) return <p>Cargando...</p>;
 
   return <ListaTarjetas personas={personas} />;
 }

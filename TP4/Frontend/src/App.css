@@ -1,47 +1,73 @@
-# Frontend/src/App.css
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #222;
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-#root {
-  max-width: 1280px;
+.main-container {
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo {
   text-align: center;
-}
-
-h1 {
+  margin-bottom: 2rem;
   font-size: 2.5em;
-  margin-bottom: 1rem;
+  font-weight: bold;
 }
 
-.card {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card-persona {
+  border: 1px solid #444;
+  border-radius: 12px;
   padding: 1.5rem;
-  margin: 1rem 0;
-  transition: transform 0.2s;
+  width: 260px;
+  box-shadow: 2px 2px 12px #111;
+  background: #333;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card:hover {
-  transform: scale(1.05);
+.card-persona:hover {
+  transform: scale(1.07);
+  box-shadow: 4px 8px 24px #000;
+  z-index: 2;
 }
 
-.person-info {
-  font-size: 1.2em;
-  margin: 0.5rem 0;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  background-color: #1a1a1a;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.25s;
-}
-
-button:hover {
-  background-color: #646cff;
+@media (max-width: 900px) {
+  .cards-container {
+    gap: 1rem;
+  }
+  .card-persona {
+    width: 90vw;
+    min-width: 220px;
+    max-width: 98vw;
+  }
+  .titulo {
+    font-size: 2em;
+  }
 }
