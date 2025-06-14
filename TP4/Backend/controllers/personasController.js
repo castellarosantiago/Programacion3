@@ -1,7 +1,7 @@
-const personas = require("../models/personasModel");
+const { getPersonas } = require('../models/personasModel');
 
 const obtenerPersonas = (req, res) => {
-  res.json(personas);
+  res.json(getPersonas());
 };
 
 module.exports = { obtenerPersonas };

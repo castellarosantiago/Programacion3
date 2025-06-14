@@ -1,9 +1,14 @@
 const personas = [
-  { id: 1, nombre: "Ana", apellido: "Gómez", edad: 28, email: "ana@gmail.com" },
-  { id: 2, nombre: "Luis", apellido: "Pérez", edad: 34, email: "luis@gmail.com" },
-  { id: 3, nombre: "Sofía", apellido: "López", edad: 22, email: "sofia@gmail.com" },
-  { id: 4, nombre: "Carlos", apellido: "Ramírez", edad: 40, email: "carlos@gmail.com" },
-  { id: 5, nombre: "Valentina", apellido: "Martínez", edad: 30, email: "valen@gmail.com" },
+  { id: 1, nombre: "Santiago", apodo: "Caste", apellido: "Castellaro", edad: 22, email: "caste@gmail.com" },
+  { id: 2, nombre: "Santiago", apodo: "Santi", apellido: "Minor", edad: 19, email: "minorsanti@gmail.com" },
+  { id: 3, nombre: "Lourdes", apodo: "Lula", apellido: "Gerdes", edad: 19, email: "lulagerdes@gmail.com" },
+  { id: 4, nombre: "Paula", apodo: "Pau", apellido: "General", edad: 19, email: "paugeneral@gmail.com" },
+  { id: 5, nombre: "Sergio", apodo: "Profe", apellido: "Antozzi", edad: "?", email: "santozzi@gmail.com" },
+  {id: 6, nombre: "Juan Carlos", apodo: "Juanca", apellido: "Mendizabal", edad: 58, email:"jcm@gmail.com"}
 ];
 
-module.exports = personas;
+function getPersonas() {
+  return personas;
+}
+
+module.exports = { getPersonas };

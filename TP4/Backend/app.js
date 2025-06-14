@@ -3,8 +3,8 @@ const app = express();
 const personaRoutes = require("./routes/personas.routes");
 const cors = require("cors");
 
-app.use(cors()); // Allow connections from the frontend
-app.use("/api", personaRoutes);
+app.use(cors()); 
+app.use("/api/personas", personaRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
