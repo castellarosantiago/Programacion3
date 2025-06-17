@@ -15,7 +15,7 @@ class TurnosController{
 async cancelarTurno(req, res){
     try{
         const {idTurno} = req.params;
-        const turnoCancelado = await turnosModel.cancelarTurno(idTurno);
+        const turnoCancelado = await turnosModel.cancelar(idTurno, req.user.userId);
         res.status(200).json({message: 'Turno cancelado', turno: turnoCancelado});
     }catch(error){
         res.status(404).json({message: error.message});

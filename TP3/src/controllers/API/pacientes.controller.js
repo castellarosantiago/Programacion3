@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const Config = require('../../config/config');
 
 exports.getLogin = (req, res) => {
-  res.render('pacientes-login', { error: null, success: null });
+  res.status(200).json({ message: "Login de paciente" });
 };
 
 exports.postLogin = async (req, res) => {
@@ -12,71 +12,56 @@ exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
     const token = await pacientesModel.validate(email, password);
     res.cookie('pacienteToken', token, { httpOnly: true });
-    req.session.success = '¡Bienvenido!';
-    res.redirect('/pacientes/turnos');
+    res.status(200).json({ token, message: "¡Bienvenido!" });
   } catch (error) {
-    res.render('pacientes-login.ejs', { error: error.message, success: null });
+    res.status(401).json({ error: error.message });
   }
 };
 
 exports.getRegister = (req, res) => {
-  res.render('pacientes-register.ejs', { error: null, success: null });
+  res.status(200).json({ message: "Registro de paciente" });
 };
 
 exports.postRegister = async (req, res) => {
   try {
     const { dni, nombre, apellido, email, password } = req.body;
-    await pacientesModel.create({ dni, nombre, apellido, email, password });
-    req.session.success = 'Registro exitoso. Ahora puedes iniciar sesión.';
-    res.redirect('/pacientes/login');
+    const paciente = await pacientesModel.create({ dni, nombre, apellido, email, password });
+    res.status(201).json({ paciente, message: "Registro exitoso. Ahora puedes iniciar sesión." });
   } catch (error) {
-    res.render('pacientes-register.ejs', { error: error.message, success: null });
+    res.status(400).json({ error: error.message });
   }
 };
 
 exports.logout = (req, res) => {
   res.clearCookie('pacienteToken');
-  res.redirect('/pacientes/login');
+  res.status(200).json({ message: "Logout exitoso" });
 };
 
-// Ver solo turnos disponibles (no asignados)
 exports.getTurnosDisponibles = async (req, res) => {
   const turnos = (await turnosModel.list()).filter(t => !t.pacienteId);
-  const success = req.session.success;
-  req.session.success = null;
-  res.render('pacientes-turnos.ejs', { turnos, user: req.user, error: null, success });
+  res.status(200).json({ turnos });
 };
 
-// Ver solo los turnos del paciente logueado
 exports.getMisTurnos = async (req, res) => {
   const turnos = await turnosModel.list();
   const misTurnos = turnos.filter(t => t.pacienteId === req.user.userId);
-  const success = req.session.success;
-  req.session.success = null;
-  res.render('pacientes-mis-turnos.ejs', { turnos: misTurnos, error: null, success });
+  res.status(200).json({ turnos: misTurnos });
 };
 
-// Asignar turno disponible al paciente logueado
 exports.asignarTurno = async (req, res) => {
   try {
-    await turnosModel.asignar(req.params.id, req.user.userId);
-    req.session.success = 'Turno asignado correctamente.';
-    res.redirect('/pacientes/turnos');
+    const turno = await turnosModel.asignar(req.params.id, req.user.userId);
+    res.status(200).json({ turno, message: "Turno asignado correctamente." });
   } catch (error) {
-    const turnos = (await turnosModel.list()).filter(t => !t.pacienteId);
-    res.render('pacientes-turnos.ejs', { turnos, user: req.user, error: error.message, success: null });
+    res.status(400).json({ error: error.message });
   }
 };
 
-// Cancelar turno propio
 exports.cancelarTurno = async (req, res) => {
   try {
     await turnosModel.cancelar(req.params.id, req.user.userId);
-    req.session.success = 'Turno cancelado correctamente.';
-    res.redirect('/pacientes/mis-turnos');
+    res.status(200).json({ message: "Turno cancelado correctamente." });
   } catch (error) {
-    const turnos = await turnosModel.list();
-    const misTurnos = turnos.filter(t => t.pacienteId === req.user.userId);
-    res.render('pacientes-mis-turnos.ejs', { turnos: misTurnos, error: error.message, success: null });
+    res.status(400).json({ error: error.message });
   }
 };

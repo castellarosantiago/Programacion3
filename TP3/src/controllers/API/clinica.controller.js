@@ -4,52 +4,64 @@ const turnosModel = require('../../models/mock/turnos.models.js');
 class ClinicaController {
     async vistaPacientes(req, res) {
         const pacientes = await pacientesModel.list();
-        res.render('pacientes.ejs', { pacientes });
+        res.status(200).json({ pacientes });
     }
 
     nuevoPaciente(req, res) {
-        res.render('nuevo-paciente.ejs', {error: null});
+        res.status(200).json({ message: "Formulario para nuevo paciente" });
     }
 
-    async crearPaciente(req, res) {
+async crearPaciente(req, res) {
+    try {
+        console.log('BODY:', req.body);
         const {dni, nombre, apellido, email, password } = req.body;
-        try{
-            await pacientesModel.create({dni, nombre, apellido, email, password});
-            res.redirect('/clinica/pacientes');
-        }catch(error){
-            res.render('nuevo-paciente.ejs', { error: error.message });
+        if (!dni || !nombre || !apellido || !email || !password) {
+            return res.status(400).json({ error: "Faltan datos" });
         }
+        const paciente = await pacientesModel.create({dni, nombre, apellido, email, password});
+        res.status(201).json({ paciente, message: "Paciente creado correctamente" });
+    } catch(error) {
+        res.status(400).json({ error: error.message });
     }
+}
 
-    async vistaTurnos(req, res) {
-        const turnos = await turnosModel.getAllTurnos();
-        const pacientes = await pacientesModel.getAllPacientes();
-        res.render('turnos.ejs', {turnos, pacientes});
+async vistaPacientes(req, res) {
+    const pacientes = await pacientesModel.list();
+    if (req.accepts('html')) {
+        return res.render('pacientes', { pacientes });
     }
+    res.status(200).json({ pacientes });
+}
 
-    // Asignar turno a paciente (desde la clínica)
+async vistaTurnos(req, res) {
+    const turnos = await turnosModel.getAllTurnos();
+    const pacientes = await pacientesModel.getAllPacientes();
+    if (req.accepts('html')) {
+        return res.render('turnos', { turnos, pacientes });
+    }
+    res.status(200).json({ turnos, pacientes });
+}
+
     async asignarTurno(req, res) {
         const turnoId = req.params.id;
         const pacienteId = req.body.pacienteId;
         try {
-            await turnosModel.asignar(turnoId, pacienteId);
-            res.redirect('/clinica/turnos');
+            const turno = await turnosModel.asignar(turnoId, pacienteId);
+            res.status(200).json({ turno, message: "Turno asignado correctamente" });
         } catch (error) {
-            // Podrías mostrar un mensaje de error en la vista si lo deseas
-            res.redirect('/clinica/turnos');
+            res.status(400).json({ error: error.message });
         }
     }
 
-    // Cancelar turno (deja el turno disponible)
     async cancelarTurno(req, res) {
         const turnoId = req.params.id;
-        // Busca el turno y cancela sin importar el paciente
         const turno = (await turnosModel.getAllTurnos()).find(t => t.id == turnoId);
         if (turno && turno.pacienteId) {
             await turnosModel.cancelar(turnoId, turno.pacienteId);
+            res.status(200).json({ message: "Turno cancelado correctamente" });
+        } else {
+            res.status(400).json({ error: "No se puede cancelar el turno" });
         }
-        res.redirect('/clinica/turnos');
     }
 }
-
 module.exports = new ClinicaController();
