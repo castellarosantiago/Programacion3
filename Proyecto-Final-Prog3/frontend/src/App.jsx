@@ -1,6 +1,6 @@
 import React from 'react';
 import Inicio from './components/Inicio/Inicio';
-import './styles/app.css'
+import '../src/App.css'
 function App() {
   return (
     <div className="App">
