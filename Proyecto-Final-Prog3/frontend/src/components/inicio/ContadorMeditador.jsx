@@ -1,70 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const ContadorMeditador = ({ duracion, imagenFondo }) => {
-    const [estado, setEstado] = useState('inhalar');
-    const [tiempoRestante, setTiempoRestante] = useState(duracion.inhalar);
-    const [ciclo, setCiclo] = useState(0);
-    const [activo, setActivo] = useState(false);
+const fases = ['inhalar', 'aguantar', 'exhalar'];
 
-useEffect(() => {
-    let intervalo;
+const ContadorMeditador = ({ duracion }) => {
+  // Usar ref para siempre tener el valor más reciente de duracion
+  const duracionRef = useRef(duracion);
+  useEffect(() => { duracionRef.current = duracion; }, [duracion]);
 
-    if (activo) {
-        intervalo = setInterval(() => {
-            setTiempoRestante((prevTiempo) => {
-                if (prevTiempo > 0) {
-                    return prevTiempo - 1;
-                } else {
-                    setEstado((prevEstado) => {
-                        if (prevEstado === 'inhalar') {
-                            setTiempoRestante(duracion.aguantar);
-                            return 'aguantar';
-                        } else if (prevEstado === 'aguantar') {
-                            setTiempoRestante(duracion.exhalar);
-                            return 'exhalar';
-                        } else {
-                            setCiclo((prevCiclo) => prevCiclo + 1);
-                            setTiempoRestante(duracion.inhalar);
-                            return 'inhalar';
-                        }
-                    });
-                    return 0; // El valor real se actualiza por setTiempoRestante arriba
-                }
-            });
-        }, 1000);
+  const [estado, setEstado] = useState('inhalar');
+  const [tiempoRestante, setTiempoRestante] = useState(duracion.inhalar);
+  const [ciclo, setCiclo] = useState(1);
+  const [activo, setActivo] = useState(false);
+
+  // Sincronizar tiempoRestante si cambian los parámetros y no está activo
+  useEffect(() => {
+    if (!activo) {
+      setEstado('inhalar');
+      setTiempoRestante(duracion.inhalar);
+      setCiclo(1);
     }
+  }, [duracion, activo]);
 
+  useEffect(() => {
+    if (!activo) return;
+    let intervalo = setInterval(() => {
+      setTiempoRestante(prev => {
+        if (prev > 1) return prev - 1;
+        // Cambio de fase
+        let idx = fases.indexOf(estado);
+        if (idx < 2) {
+          // Siguiente fase
+          const siguiente = fases[idx + 1];
+          setEstado(siguiente);
+          setTiempoRestante(duracionRef.current[siguiente]);
+        } else {
+          // Fin de ciclo
+          if (ciclo < duracionRef.current.ciclos) {
+            setEstado('inhalar');
+            setTiempoRestante(duracionRef.current.inhalar);
+            setCiclo(ciclo + 1);
+          } else {
+            setActivo(false);
+          }
+        }
+        return 0;
+      });
+    }, 1000);
     return () => clearInterval(intervalo);
-}, [activo, duracion]);
+  }, [activo, estado, ciclo]);
 
-    const iniciarMeditacion = () => {
-        setActivo(true);
-        setCiclo(0);
-        setEstado('inhalar');
-        setTiempoRestante(duracion.inhalar);
-    };
+  const iniciarMeditacion = () => {
+    setActivo(true);
+    setEstado('inhalar');
+    setTiempoRestante(duracion.inhalar);
+    setCiclo(1);
+  };
 
-    const pausarMeditacion = () => {
-        setActivo(false);
-    };
+  const pausarMeditacion = () => setActivo(false);
 
-    const reiniciarMeditacion = () => {
-        setActivo(false);
-        setCiclo(0);
-        setEstado('inhalar');
-        setTiempoRestante(duracion.inhalar);
-    };
+  const reiniciarMeditacion = () => {
+    setActivo(false);
+    setEstado('inhalar');
+    setTiempoRestante(duracion.inhalar);
+    setCiclo(1);
+  };
 
-    return (
-        <div className="contador-meditador" style={{ backgroundImage: `url(${imagenFondo})` }}>
-            <h1>{estado}</h1>
-            <h2>{tiempoRestante} s</h2>
-            <button onClick={iniciarMeditacion}>Iniciar</button>
-            <button onClick={pausarMeditacion}>Pausar</button>
-            <button onClick={reiniciarMeditacion}>Reiniciar</button>
-            <p>Ciclo: {ciclo}</p>
-        </div>
-    );
+  return (
+    <div className="contador-meditador">
+      <h1>{estado}</h1>
+      <h2>{tiempoRestante} s</h2>
+      <button onClick={iniciarMeditacion}>Iniciar</button>
+      <button onClick={pausarMeditacion}>Pausar</button>
+      <button onClick={reiniciarMeditacion}>Reiniciar</button>
+      <p>Ciclo: {ciclo} / {duracion.ciclos}</p>
+    </div>
+  );
 };
 
 export default ContadorMeditador;

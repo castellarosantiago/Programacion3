@@ -12,7 +12,7 @@ const Inicio = () => {
     <div>
       <h1>Bienvenido a la Meditación</h1>
       <ContadorMeditador duracion={duracionDefault} imagenFondo={null} />
-      <Personalizacion/>
+      <Personalizacion  personalizacion={personalizacion} onChange={handlePersonalizacionChange}/>
       <TarjetasMeditacion/>
       <CategoriasImagenes/>
     </div>
