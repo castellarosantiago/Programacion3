@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { title, inhale, hold, exhale } = req.body;
+  const { title, inhale, hold, exhale, cicles } = req.body;
   const user = await User.findOne({ where: { email: 'demo@meditacion.com' } });
-  const newBreath = await BreathSetting.create({ title, inhale, hold, exhale, UserId: user.id });
+  const newBreath = await BreathSetting.create({ title, inhale, hold, exhale, cicles, UserId: user.id });
   res.status(201).json(newBreath);
 });
 

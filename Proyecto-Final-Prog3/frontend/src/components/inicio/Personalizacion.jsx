@@ -44,7 +44,18 @@ function Personalizacion({ personalizacion, onChange }) {
           />
         </div>
       </div>
-      <button>Guardar</button>
+      <button onClick= { async () => {
+        try {
+          await fetch("http://localhost:3001/breath", {
+            method: "POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({title:titulo, inhale:inhalar, hold:aguantar, exhale:exhalar, cicles:ciclos})
+          })
+        }
+        catch (error) {
+          console.error("Error guardando la personalizacion:", error);
+        }
+      }}>Guardar</button>
     </div>
   );
 }
