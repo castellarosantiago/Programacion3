@@ -8,6 +8,7 @@ const preferenceRoutes = require('./routes/preferences');
 app.use(cors());
 app.use(express.json());
 
+
 app.use('/images', imageRoutes);
 app.use('/breath', breathRoutes);
 app.use('/preferences', preferenceRoutes);
