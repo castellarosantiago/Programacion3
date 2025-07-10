@@ -101,7 +101,6 @@ const ContadorMeditador = ({ duracion/*, backgroundImage */ }) => {
         <p className="ciclo">Ciclo: {ciclo} / {duracion.ciclos}</p>
       </div>
     </div>
-  );
-};
+  );};
 
 export default ContadorMeditador;

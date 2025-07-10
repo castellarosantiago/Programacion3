@@ -5,7 +5,7 @@ import TarjetasMeditacion from './TarjetasMeditacion';
 import CategoriasImagenes from './CategoriasImagenes';
 
 
-const duracionDefault = { inhalar: 4, aguantar: 4, exhalar: 4 };
+//const duracionDefault = { inhalar: 4, aguantar: 4, exhalar: 4 };
 
 
 
