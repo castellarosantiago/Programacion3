@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../../styles/personalizacion.css'
 function Personalizacion({ personalizacion, onChange }) {
   // Desestructuramos los valores actuales
   const { inhalar, aguantar, exhalar, ciclos, titulo } = personalizacion;

@@ -25,6 +25,7 @@ const Inicio = () => {
   return (
     <div>
       <h1>Bienvenido a la Meditación</h1>
+      {/*<ContadorMeditador duracion={personalizacion} backgroundImage={fondoDesdeDB} /> */}
       <ContadorMeditador duracion={personalizacion} imagenFondo={null} />
       <Personalizacion  personalizacion={personalizacion} onChange={handlePersonalizacionChange}/>
       <TarjetasMeditacion/>
