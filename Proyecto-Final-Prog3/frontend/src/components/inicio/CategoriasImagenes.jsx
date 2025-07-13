@@ -1,6 +1,5 @@
-
-
 import React, { useState } from 'react';
+import '../../styles/categoriaImagenes.css';
 
 
 function Card({ id, nombre, imagen, urlColeccion, isSelected, seleccionarCard }) {
@@ -79,4 +78,4 @@ function Card({ id, nombre, imagen, urlColeccion, isSelected, seleccionarCard })
   );
 }
 
-export default Galeria;
+export default GaleriaImagenes;

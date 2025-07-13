@@ -18,9 +18,21 @@ const Inicio = () => {
     titulo: ''
   });
 
+
+    useEffect(() => {
+    const guardadas = localStorage.getItem('preferencias');
+    if (guardadas) {
+      setPreferencias(JSON.parse(guardadas));
+    }
+  }, []);
   const handlePersonalizacionChange = (nuevaPersonalizacion) => {
     setPersonalizacion(nuevaPersonalizacion);
   };
+
+  const borrarPersonalizacion = (idABorrar) => {
+    const nuevaPersonalizacion = PreferenciasGuardadas.filter((_, index) => index !== idABorrar)
+    setPersonalizacion(nuevaPersonalizacion);
+  }
 
   return (
     <div>
@@ -28,7 +40,11 @@ const Inicio = () => {
       {/*<ContadorMeditador duracion={personalizacion} backgroundImage={fondoDesdeDB} /> */}
       <ContadorMeditador duracion={personalizacion} imagenFondo={null} />
       <Personalizacion  personalizacion={personalizacion} onChange={handlePersonalizacionChange}/>
-      <TarjetasMeditacion/>
+      <TarjetasMeditacion 
+      PreferenciasGuardadas = {PreferenciasGuardadas}
+      onSeleccionar={handlePersonalizacionChange}
+      onBorrar={borrarPersonalizacion}
+      />
       <CategoriasImagenes/>
     </div>
   );

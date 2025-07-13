@@ -6,7 +6,64 @@ function Personalizacion({ personalizacion, onChange }) {
 
   // Función para actualizar cualquier campo
   const actualizar = (campo, valor) => {
-    onChange({ ...personalizacion, [campo]: valor });
+    if(campo === 'inhalar' || campo === 'exhalar'){
+      const nuevoValor = Math.max(1, valor);
+
+    onChange({ ...personalizacion, inhalar: nuevoValor, exhalar: nuevoValor });
+    }else{
+      onChange({...personalizacion, [campo]: valor});
+    }
+
+  };
+
+  // Función para guardar los datos de meditaciones personalizadas (POST)
+  // const guardar = async () => {
+  //   if (!titulo.trim()) {
+  //     alert("Por favor ingresa un título para guardar esta meditación.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await fetch("http://localhost:3001/breath", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         title: titulo,
+  //         inhale: inhalar,
+  //         hold: aguantar,
+  //         exhale: exhalar,
+  //         cicles: ciclos
+  //       })
+  //     });
+
+  //     if (res.ok) {
+  //       const nueva = await res.json();
+  //       alert("Meditación guardada con éxito");
+  //       // Podríamos emitir un evento o usar un callback para actualizar PreferenciasGuardadas
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al guardar:", error);
+  //   }
+  // };
+
+  const guardar = () => {
+    if(!titulo.trim()){
+      alert("Por favor incluya un titulo para su meditacion personalizada");
+      return;
+    }
+  const nuevaPersonalizacion = {
+    title: titulo,
+    inhale: inhalar, 
+    hold: aguantar,
+    exhale: exhalar,
+    cicles: ciclos
+  };
+  //agarrar las existentes para agregar la nueva
+  const persCargadas = JSON.parse(localStorage.getItem("preferencias")) || [];
+  const persActualizadas = [...persCargadas, nuevaPersonalizacion];
+  localStorage.setItem("preferencias", JSON.stringify(persActualizadas));
+
+  alert("Nueva personalizacion guardada en localStorage");
   };
 
   return (
@@ -21,8 +78,10 @@ function Personalizacion({ personalizacion, onChange }) {
             <span>Inhalar</span>
             <div className='input-tiempo'>
               <button onClick={() => actualizar('inhalar', Math.max(1, inhalar - 1))}>-</button>
+              {/*button onclick{() => actualizar('inhalar', inhalar - 1, 'exhalar', exhalar - 1)} */}
               <span>{inhalar}</span>
               <button onClick={() => actualizar('inhalar', inhalar + 1)}>+</button>
+              {/*button onclick{() => actualizar('inhalar', inhalar - 1, 'exhalar', exhalar - 1)} */}
             </div>
           </div>
           <div>
@@ -37,8 +96,10 @@ function Personalizacion({ personalizacion, onChange }) {
             <span>Exhalar</span>
             <div className='input-tiempo'>
               <button onClick={() => actualizar('exhalar', Math.max(1, exhalar - 1))}>-</button>
+              {/*button onclick{() => actualizar('inhalar', inhalar +1, 'exhalar', exhalar + 1)} */}
               <span>{exhalar}</span>
               <button onClick={() => actualizar('exhalar', exhalar + 1)}>+</button>
+              {/*button onclick{() => actualizar('exhalar', exhalar + 1, 'inhalar', inhalar + 1)} */}
             </div>
           </div>
           <div>
@@ -51,18 +112,7 @@ function Personalizacion({ personalizacion, onChange }) {
             />
           </div>
         </div>
-        <button onClick= { async () => {
-          try {
-            await fetch("http://localhost:3001/breath", {
-              method: "POST",
-              headers:{"Content-Type":"application/json"},
-              body: JSON.stringify({title:titulo, inhale:inhalar, hold:aguantar, exhale:exhalar, cicles:ciclos})
-            })
-          }
-          catch (error) {
-            console.error("Error guardando la personalizacion:", error);
-          }
-        }}>Guardar</button>
+        <button onClick= {guardar}>Guardar</button>
       </div>
     </div>
   );

@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-
-const PreferenciasGuardadas = () => {
+import '../../styles/tarjetasMeditacion.css'
+const TarjetasMeditacion = ({onSeleccionar}) => {
   const [preferencias, setPreferencias] = useState([]);
 
   
   useEffect(() => {
-    const obtenerPreferencias = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/breath");
-        const data = await res.json();
-        setPreferencias(data);
-      } catch (error) {
-        console.error("Error al obtener las preferencias:", error);
-      }
-    };
+    const datosGuardados = localStorage.getItem("preferencias");
+    if(datosGuardados){
+      setPreferencias(JSON.parse(datosGuardados));
+    }
+    //VERSION PARA BACKEND
+    // const obtenerPreferencias = async () => {
+    //   try {
+    //     const res = await fetch("http://localhost:3001/breath");
+    //     const data = await res.json();
+    //     setPreferencias(data);
+    //   } catch (error) {
+    //     console.error("Error al obtener las preferencias:", error);
+    //   }
+    // };
 
-    obtenerPreferencias();
+    //obtenerPreferencias();
   }, []);
 
   return (
@@ -32,6 +37,17 @@ const PreferenciasGuardadas = () => {
               <p><strong>Aguantar:</strong> {pref.hold} seg</p>
               <p><strong>Exhalar:</strong> {pref.exhale} seg</p>
               <p><strong>Ciclos:</strong> {pref.cicles}</p>
+              <button onClick={() =>
+                onSeleccionar({
+                  titulo: pref.title,
+                  inhalar: pref.inhale, 
+                  aguantar: pref.hold,
+                  exhalar: pref.exhale, 
+                  ciclos: pref.cicles
+                })
+              }>Iniciar</button>
+              <button className='btn-borrar' onClick={() => onBorrar(index)}>
+                Borrar</button>
             </div>
           ))}
         </div>
@@ -40,4 +56,4 @@ const PreferenciasGuardadas = () => {
   );
 };
 
-export default PreferenciasGuardadas;
+export default TarjetasMeditacion;
