@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/personalizacion.css'
-function Personalizacion({ personalizacion, onChange }) {
+function Personalizacion({ personalizacion, onChange, onGuardar }) {
   // Desestructuramos los valores actuales
   const { inhalar, aguantar, exhalar, ciclos, titulo } = personalizacion;
 
@@ -62,9 +62,10 @@ function Personalizacion({ personalizacion, onChange }) {
   const persCargadas = JSON.parse(localStorage.getItem("preferencias")) || [];
   const persActualizadas = [...persCargadas, nuevaPersonalizacion];
   localStorage.setItem("preferencias", JSON.stringify(persActualizadas));
-
+  onGuardar(nuevaPersonalizacion);
   alert("Nueva personalizacion guardada en localStorage");
   };
+  
 
   return (
     <div className="personalizacion">

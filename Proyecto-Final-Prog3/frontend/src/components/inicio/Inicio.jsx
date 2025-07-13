@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContadorMeditador from './ContadorMeditador';
 import Personalizacion from './Personalizacion';
 import TarjetasMeditacion from './TarjetasMeditacion';
 import CategoriasImagenes from './CategoriasImagenes';
-
-
-//const duracionDefault = { inhalar: 4, aguantar: 4, exhalar: 4 };
-
-
 
 const Inicio = () => {
   const [personalizacion, setPersonalizacion] = useState({
@@ -18,34 +13,45 @@ const Inicio = () => {
     titulo: ''
   });
 
+  const [preferencias, setPreferencias] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
     const guardadas = localStorage.getItem('preferencias');
     if (guardadas) {
       setPreferencias(JSON.parse(guardadas));
     }
   }, []);
-  const handlePersonalizacionChange = (nuevaPersonalizacion) => {
-    setPersonalizacion(nuevaPersonalizacion);
+
+  const handlePersonalizacionChange = (nueva) => {
+    setPersonalizacion(nueva);
   };
 
-  const borrarPersonalizacion = (idABorrar) => {
-    const nuevaPersonalizacion = PreferenciasGuardadas.filter((_, index) => index !== idABorrar)
-    setPersonalizacion(nuevaPersonalizacion);
-  }
+  const guardarPreferencia = (nueva) => {
+    const actualizadas = [...preferencias, nueva];
+    localStorage.setItem("preferencias", JSON.stringify(actualizadas));
+    setPreferencias(actualizadas);
+  };
+
+  const borrarPreferencia = (indexABorrar) => {
+    const actualizadas = preferencias.filter((_, i) => i !== indexABorrar);
+    localStorage.setItem("preferencias", JSON.stringify(actualizadas));
+    setPreferencias(actualizadas);
+  };
 
   return (
     <div>
-
-      {/*<ContadorMeditador duracion={personalizacion} backgroundImage={fondoDesdeDB} /> */}
-      <ContadorMeditador duracion={personalizacion} imagenFondo={null} />
-      <Personalizacion  personalizacion={personalizacion} onChange={handlePersonalizacionChange}/>
-      <TarjetasMeditacion 
-      PreferenciasGuardadas = {PreferenciasGuardadas}
-      onSeleccionar={handlePersonalizacionChange}
-      onBorrar={borrarPersonalizacion}
+      <ContadorMeditador duracion={personalizacion} />
+      <Personalizacion
+        personalizacion={personalizacion}
+        onChange={handlePersonalizacionChange}
+        onGuardar={guardarPreferencia}
       />
-      <CategoriasImagenes/>
+      <TarjetasMeditacion
+        preferencias={preferencias}
+        onSeleccionar={handlePersonalizacionChange}
+        onBorrar={borrarPreferencia}
+      />
+      <CategoriasImagenes />
     </div>
   );
 };
