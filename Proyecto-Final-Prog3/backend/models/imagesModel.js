@@ -4,10 +4,10 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Images_category extends Model {
     static associate(models) {
-      // Asociación: muchos Images_categories pertenecen a una categoría
+      //  muchos Images_category pertenecen a una categoría
       Images_category.belongsTo(models.Categories, {
         foreignKey: 'id_category',
-        as: 'Categories',
+        as: 'Category',
       });
     }
   }
@@ -35,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Images_category',
-      timestamps: false
     }
   );
 
