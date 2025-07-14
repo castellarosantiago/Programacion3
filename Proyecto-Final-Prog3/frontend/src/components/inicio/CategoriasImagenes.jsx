@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import '../../styles/categoriaImagenes.css';
+import React, { useEffect, useState } from 'react';
 
 
-function Card({ id, nombre, imagen, urlColeccion, isSelected, seleccionarCard }) {
+function Card({ id, nombre, imagen, isSelected, seleccionarCard }) {
   return (
     <div
       className={`card ${isSelected ? 'selected' : ''}`}
@@ -14,51 +13,35 @@ function Card({ id, nombre, imagen, urlColeccion, isSelected, seleccionarCard })
   );
 }
 
-
- function GaleriaImagenes() {
-  const colecciones = [
-    {
-      id: 1,
-      nombre: 'Montañas',
-      imagen: '',
-      urlColeccion: ''
-    },
-    {
-      id: 2,
-      nombre: 'Playa',
-      imagen: '',
-      urlColeccion: ''
-    },
-    {
-      id: 3,
-      nombre: 'Cascada',
-      imagen: '',
-      urlColeccion: ''
-    },
-    {
-      id: 4, 
-      nombre: 'Ciudades',
-      imagen: '',
-      urlColeccion: ''
-    },
-    { 
-      id: 5,
-      nombre: 'Fogata',
-      imagen: '',
-      urlColeccion: ''
-    },
-    {
-      id: 6, 
-      nombre: 'Espacio',
-      imagen: '',
-      urlColeccion: ''
-    }
-  ];
-
+function GaleriaImagenes(onSeleccionarImagen) {
+  const [colecciones, setColecciones] = useState([]);
   const [seleccionada, setSeleccionada] = useState(null);
 
-  const seleccionarCard = (id) => {
+  useEffect(() => {
+    const obtenerColecciones = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/categories'); 
+        const data = await res.json();
+
+        const mapeadas = data.map((categoria) => ({
+          id: categoria.id_category,
+          nombre: categoria.name,
+          imagen: categoria.Images_categories[0]?.url_image || '', 
+          imagenes: categoria.Images_categories, 
+        }));
+
+        setColecciones(mapeadas);
+      } catch (error) {
+        console.error('Error al obtener categorías:', error);
+      }
+    };
+
+    obtenerColecciones();
+  }, []);
+
+  const seleccionarCard = (id, imagen) => {
     setSeleccionada(id);
+    onSeleccionarImagen(imagen);
   };
 
   return (
@@ -69,9 +52,8 @@ function Card({ id, nombre, imagen, urlColeccion, isSelected, seleccionarCard })
           id={coleccion.id}
           nombre={coleccion.nombre}
           imagen={coleccion.imagen}
-          urlColeccion={coleccion.urlColeccion}
           isSelected={seleccionada === coleccion.id}
-          seleccionarCard={seleccionarCard}
+          seleccionarCard={() => seleccionarCard(coleccion.id, coleccion.imagen)}
         />
       ))}
     </div>

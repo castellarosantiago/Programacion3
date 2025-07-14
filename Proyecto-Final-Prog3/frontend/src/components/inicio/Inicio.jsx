@@ -14,6 +14,7 @@ const Inicio = ({usuario}) => {
   });
 
   const [preferencias, setPreferencias] = useState([]);
+  const [imagenFondo, setImagenFondo] = useState(null);
 
   useEffect(() => {
     const guardadas = localStorage.getItem('preferencias');
@@ -41,7 +42,7 @@ const Inicio = ({usuario}) => {
 
   return (
     <div>
-      <ContadorMeditador duracion={personalizacion} />
+      <ContadorMeditador duracion={personalizacion} backgroundImage = {imagenFondo} />
       <Personalizacion
         personalizacion={personalizacion}
         onChange={handlePersonalizacionChange}
@@ -52,7 +53,7 @@ const Inicio = ({usuario}) => {
         onSeleccionar={handlePersonalizacionChange}
         onBorrar={borrarPreferencia}
       />
-      <CategoriasImagenes />
+      <CategoriasImagenes onSeleccionarImagen={setImagenFondo}/>
     </div>
   );
 };

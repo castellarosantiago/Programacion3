@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../../styles/contadorMeditador.css';
 const fases = ['inhalar', 'aguantar', 'exhalar'];
 
-const ContadorMeditador = ({ duracion/*, backgroundImage */ }) => {
+const ContadorMeditador = ({ duracion, backgroundImage  }) => {
   // usar ref para siempre tener el valor mas reciente de duracion
   const duracionRef = useRef(duracion);
   useEffect(() => { duracionRef.current = duracion; }, [duracion]);
@@ -75,14 +75,12 @@ const ContadorMeditador = ({ duracion/*, backgroundImage */ }) => {
 
 
    return (
-    /*<div className="contador-wrapper"   style={{
+    <div className="contador-wrapper"   style={{
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
-  }}>*/
-    //etiqueta a futuro para el fondo que traemos de base de datos
-    <div className="contador-wrapper">
+  }}>
       <div className="contador-meditador">
         <div className="breath-circle-container">
           <div className="breath-circle-bg" />
