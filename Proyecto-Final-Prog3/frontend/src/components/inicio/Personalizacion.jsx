@@ -25,7 +25,7 @@ function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada, usu
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/preferences/${usuario.id_user}}`, { // id del usuario hardcodeado 
+      const res = await fetch(`http://localhost:3001/api/preferences/${usuario.id}`, { // id del usuario hardcodeado 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

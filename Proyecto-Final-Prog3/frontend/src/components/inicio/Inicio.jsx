@@ -19,7 +19,7 @@ const Inicio = ({usuario}) => {
    // muestra las preferencias ya guardadas
 const cargarPreferencias = useCallback(async () => {
   try {
-    const response = await fetch(`http://localhost:3001/api/preferences/${usuario.id_user}`);
+    const response = await fetch(`http://localhost:3001/api/preferences/${usuario.id}`);
     
     if (response.ok) {
       const data = await response.json();
@@ -29,7 +29,7 @@ const cargarPreferencias = useCallback(async () => {
     console.error("Error al obtener las preferencias", error);
     setPreferencias([]);
   }
-}, [usuario.id_user]);
+}, [usuario.id]);
 
   // useEffect(() => {
   //   if (usuario) {
