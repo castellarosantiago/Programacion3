@@ -32,7 +32,7 @@ const getPreferences = async (req, res) => {
     const { id_user } = req.params;
     const preferences = await Personalized_breaths.findAll({ where:{ id_user: id_user }}) 
 
-    if (preferences.lenght === 0){
+    if (preferences.length === 0){
       return res.status(404).json({ error: 'Preferences not found' });
     }
 

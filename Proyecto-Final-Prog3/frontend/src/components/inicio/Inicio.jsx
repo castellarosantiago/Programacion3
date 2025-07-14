@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ContadorMeditador from './ContadorMeditador';
 import Personalizacion from './Personalizacion';
 import TarjetasMeditacion from './TarjetasMeditacion';
@@ -17,20 +17,19 @@ const Inicio = ({usuario}) => {
   const [imagenFondo, setImagenFondo] = useState(null);
 
    // muestra las preferencias ya guardadas
-  const cargarPreferencias = async () => {
-    try {
-      const response = await fetch(`http://localhost:3001/api/preferences/${usuario.id_user}`); // TODO: hacer dinámico el id del usuario
-      
-      if (response.ok) {
-        const data = await response.json();
-        setPreferencias(data);
-      } 
-
-    } catch (error) {
-      console.error("Error al obtener las preferencias", error);
-      setPreferencias([]);
-    }
-  };
+const cargarPreferencias = useCallback(async () => {
+  try {
+    const response = await fetch(`http://localhost:3001/api/preferences/${usuario.id_user}`);
+    
+    if (response.ok) {
+      const data = await response.json();
+      setPreferencias(data);
+    } 
+  } catch (error) {
+    console.error("Error al obtener las preferencias", error);
+    setPreferencias([]);
+  }
+}, [usuario.id_user]);
 
   // useEffect(() => {
   //   if (usuario) {
@@ -41,7 +40,7 @@ const Inicio = ({usuario}) => {
   
   useEffect(() => {
     cargarPreferencias();
-  }, []);
+  }, [cargarPreferencias]);
 
   const handlePersonalizacionChange = (nueva) => {
     setPersonalizacion(nueva);

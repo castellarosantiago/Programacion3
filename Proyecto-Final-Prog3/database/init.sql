@@ -20,11 +20,11 @@ SELECT 'Base de datos inicializada correctamente' AS status;
 CREATE TABLE IF NOT EXISTS "Users"(
     id_user SERIAL PRIMARY KEY,
     mail VARCHAR(255) UNIQUE NOT NULL,
-    pass VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL
 );
 
 --USER DEMO
-INSERT INTO "Users"(mail, pass)
+INSERT INTO "Users"(mail, password)
 VALUES(
     'demo@gmail.com',
     '12345678'
