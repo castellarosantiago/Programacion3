@@ -16,44 +16,72 @@ const Inicio = ({usuario}) => {
   const [preferencias, setPreferencias] = useState([]);
   const [imagenFondo, setImagenFondo] = useState(null);
 
-  useEffect(() => {
-    const guardadas = localStorage.getItem('preferencias');
-    if (guardadas) {
-      setPreferencias(JSON.parse(guardadas));
+   // muestra las preferencias ya guardadas
+  const cargarPreferencias = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/preferences/2"); // TODO: hacer dinámico el id del usuario
+      
+      if (response.ok) {
+        const data = await response.json();
+        setPreferencias(data);
+      } 
+
+    } catch (error) {
+      console.error("Error al obtener las preferencias", error);
+      setPreferencias([]);
     }
+  };
+
+  useEffect(() => {
+    cargarPreferencias();
   }, []);
 
   const handlePersonalizacionChange = (nueva) => {
     setPersonalizacion(nueva);
   };
 
-  const guardarPreferencia = (nueva) => {
-    const nuevaConUsuario = {...nueva, userId: usuario.id}
-    const actualizadas = [...preferencias, nuevaConUsuario];
-    localStorage.setItem("preferencias", JSON.stringify(actualizadas));
-    setPreferencias(actualizadas);
+  // const guardarPreferencia = (nueva) => {
+  //   const nuevaConUsuario = {...nueva, userId: usuario.id}
+  //   const actualizadas = [...preferencias, nuevaConUsuario];
+  //   localStorage.setItem("preferencias", JSON.stringify(actualizadas));
+  //   setPreferencias(actualizadas);
+  // };
+
+  const borrarPreferencia = async (id_breath) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/preferences/${id_breath}`, {
+        method: 'DELETE'
+      });
+      
+      if (response.ok) {
+        await cargarPreferencias();
+      } 
+
+    } catch (error) {
+      console.error("Error al borrar la preferencia:", error);
+      alert("Error al borrar la preferencia");
+    }
   };
 
-  const borrarPreferencia = (indexABorrar) => {
-    const actualizadas = preferencias.filter((_, i) => i !== indexABorrar);
-    localStorage.setItem("preferencias", JSON.stringify(actualizadas));
-    setPreferencias(actualizadas);
+  // recarga preferencias después de guardar una nueva
+  const onPreferenciaGuardada = async () => {
+    await cargarPreferencias();
   };
 
   return (
     <div>
-      <ContadorMeditador duracion={personalizacion} backgroundImage = {imagenFondo} />
+      <ContadorMeditador duracion={personalizacion}  backgroundImage = {imagenFondo}/>
       <Personalizacion
         personalizacion={personalizacion}
         onChange={handlePersonalizacionChange}
-        onGuardar={guardarPreferencia}
+        onPreferenciaGuardada={onPreferenciaGuardada}
       />
       <TarjetasMeditacion
         preferencias={preferencias}
         onSeleccionar={handlePersonalizacionChange}
         onBorrar={borrarPreferencia}
       />
-      <CategoriasImagenes onSeleccionarImagen={setImagenFondo}/>
+      <CategoriasImagenes  onSeleccionarImagen={setImagenFondo}/>
     </div>
   );
 };

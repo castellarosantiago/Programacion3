@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Personalized_breaths extends Model {
     static associate(models) {
-      //  muchos Personalized_breaths pertenecen a un usuario
+      // Asociación: muchos Personalized_breaths pertenecen a un usuario
       Personalized_breaths.belongsTo(models.Users, {
         foreignKey: 'id_user',
         as: 'Users',

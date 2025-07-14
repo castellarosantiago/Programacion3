@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../styles/personalizacion.css'
-function Personalizacion({ personalizacion, onChange, onGuardar }) {
+function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada}) {
+// TODO: no hardcodear el id_usuario, hacerlo dinamico.
+
   // Desestructuramos los valores actuales
   const { inhalar, aguantar, exhalar, ciclos, titulo } = personalizacion;
 
@@ -16,56 +18,63 @@ function Personalizacion({ personalizacion, onChange, onGuardar }) {
 
   };
 
-  // Función para guardar los datos de meditaciones personalizadas (POST)
-  // const guardar = async () => {
-  //   if (!titulo.trim()) {
-  //     alert("Por favor ingresa un título para guardar esta meditación.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const res = await fetch("http://localhost:3001/breath", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         title: titulo,
-  //         inhale: inhalar,
-  //         hold: aguantar,
-  //         exhale: exhalar,
-  //         cicles: ciclos
-  //         userId:usuario.id
-  //       })
-  //     });
-
-  //     if (res.ok) {
-  //       const nueva = await res.json();
-  //       alert("Meditación guardada con éxito");
-  //       // Podríamos emitir un evento o usar un callback para actualizar PreferenciasGuardadas
-  //     }
-  //   } catch (error) {
-  //     console.error("Error al guardar:", error);
-  //   }
-  // };
-
-  const guardar = () => {
-    if(!titulo.trim()){
-      alert("Por favor incluya un titulo para su meditacion personalizada");
+  const guardar = async () => {
+    if (!titulo.trim()) {
+      alert("Por favor ingresa un título para guardar esta meditación.");
       return;
     }
-  const nuevaPersonalizacion = {
-    title: titulo,
-    inhale: inhalar, 
-    hold: aguantar,
-    exhale: exhalar,
-    cicles: ciclos
+
+    try {
+      const res = await fetch("http://localhost:3001/api/preferences/2", { // id del usuario hardcodeado 
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: titulo,
+          inhale: inhalar,
+          hold: aguantar,
+          exhale: exhalar,
+          cycles: ciclos
+        })
+      });
+
+      if (res.ok) {
+        alert("Meditación guardada con éxito");
+        // Podríamos emitir un evento o usar un callback para actualizar PreferenciasGuardadas  
+
+        // limpia el formulario
+        onChange({ ...personalizacion, titulo: '' });
+        
+        if (onPreferenciaGuardada) {
+          onPreferenciaGuardada();
+        }
+
+      }
+    } catch (error) {
+      console.error("Error al guardar:", error);
+    }
   };
+
+  // const guardar = () => {
+  //   if(!titulo.trim()){
+  //     alert("Por favor incluya un titulo para su meditacion personalizada");
+  //     return;
+  //   }
+  // }
+  // const nuevaPersonalizacion = {
+  //   title: titulo,
+  //   inhale: inhalar, 
+  //   hold: aguantar,
+  //   exhale: exhalar,
+  //   cicles: ciclos
+  // };
+
   //agarrar las existentes para agregar la nueva
-  const persCargadas = JSON.parse(localStorage.getItem("preferencias")) || [];
-  const persActualizadas = [...persCargadas, nuevaPersonalizacion];
-  localStorage.setItem("preferencias", JSON.stringify(persActualizadas));
-  onGuardar(nuevaPersonalizacion);
-  alert("Nueva personalizacion guardada en localStorage");
-  };
+  // const persCargadas = JSON.parse(localStorage.getItem("preferencias")) || [];
+  // const persActualizadas = [...persCargadas, nuevaPersonalizacion];
+  // localStorage.setItem("preferencias", JSON.stringify(persActualizadas));
+  // onGuardar(nuevaPersonalizacion);
+  // alert("Nueva personalizacion guardada en localStorage");
+  // };
   
 
   return (
