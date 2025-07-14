@@ -19,7 +19,7 @@ const Inicio = ({usuario}) => {
    // muestra las preferencias ya guardadas
   const cargarPreferencias = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/preferences/2"); // TODO: hacer dinámico el id del usuario
+      const response = await fetch(`http://localhost:3001/api/preferences/${usuario.id_user}`); // TODO: hacer dinámico el id del usuario
       
       if (response.ok) {
         const data = await response.json();
@@ -32,6 +32,13 @@ const Inicio = ({usuario}) => {
     }
   };
 
+  // useEffect(() => {
+  //   if (usuario) {
+  //     cargarPreferencias();
+  //   }
+  // }, [usuario]);
+
+  
   useEffect(() => {
     cargarPreferencias();
   }, []);
@@ -39,13 +46,6 @@ const Inicio = ({usuario}) => {
   const handlePersonalizacionChange = (nueva) => {
     setPersonalizacion(nueva);
   };
-
-  // const guardarPreferencia = (nueva) => {
-  //   const nuevaConUsuario = {...nueva, userId: usuario.id}
-  //   const actualizadas = [...preferencias, nuevaConUsuario];
-  //   localStorage.setItem("preferencias", JSON.stringify(actualizadas));
-  //   setPreferencias(actualizadas);
-  // };
 
   const borrarPreferencia = async (id_breath) => {
     try {
@@ -75,6 +75,7 @@ const Inicio = ({usuario}) => {
         personalizacion={personalizacion}
         onChange={handlePersonalizacionChange}
         onPreferenciaGuardada={onPreferenciaGuardada}
+        usuario={usuario}
       />
       <TarjetasMeditacion
         preferencias={preferencias}

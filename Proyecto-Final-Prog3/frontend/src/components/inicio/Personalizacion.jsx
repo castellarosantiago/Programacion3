@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/personalizacion.css'
-function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada}) {
+function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada, usuario}) {
 // TODO: no hardcodear el id_usuario, hacerlo dinamico.
 
   // Desestructuramos los valores actuales
@@ -25,7 +25,7 @@ function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada}) {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/api/preferences/2", { // id del usuario hardcodeado 
+      const res = await fetch(`http://localhost:3001/api/preferences/${usuario.id_user}}`, { // id del usuario hardcodeado 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -12,7 +12,7 @@ function App() {
       {!usuario ? (
         <Login onLoginExitoso = {handleLoginRegistro}/>
       ):(      
-      <Inicio />
+      <Inicio usuario={usuario} />
        )}
     </div>
   );

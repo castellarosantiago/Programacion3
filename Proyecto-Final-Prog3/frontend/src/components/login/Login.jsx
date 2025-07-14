@@ -37,7 +37,7 @@ const Login = ({ onLoginExitoso }) => {
              return;
          }
 
-         const url = isRegistrado ? 'http://localhost:3001/registro' : 'http://localhost:3001/login';
+         const url = isRegistrado ? 'http://localhost:3001/api/auth/registro' : 'http://localhost:3001/api/auth/login';
 
          try {
              const res = await fetch(url, {
@@ -54,8 +54,8 @@ const Login = ({ onLoginExitoso }) => {
              }
 
              // guardar usuario logueado
-             localStorage.setItem('usuarioActual', JSON.stringify(data.usuario));
-             localStorage.setItem('preferencias', JSON.stringify(data.usuario.preferencias || []));
+            //  localStorage.setItem('usuarioActual', JSON.stringify(data.usuario));
+            //  localStorage.setItem('preferencias', JSON.stringify(data.usuario.preferencias || []));
 
              // callback para pasar el user al App
              onLoginExitoso(data.usuario);
