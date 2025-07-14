@@ -13,3 +13,22 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- Mensaje de confirmación
 SELECT 'Base de datos inicializada correctamente' AS status;
+
+---------------------------------------------------------------------------------------------------
+--TABLA USERS CON USUARIO CREADO, PUEDE RECIBIR MAS USERS
+
+CREATE TABLE IF NOT EXISTS "Users"(
+    id_user SERIAL PRIMARY KEY,
+    mail VARCHAR(255) UNIQUE NOT NULL,
+    pass VARCHAR(255) NOT NULL
+);
+
+--USER DEMO
+INSERT INTO "Users"(mail, pass)
+VALUES(
+    'demo@gmail.com',
+    '12345678'
+)
+ON CONFLICT (mail) DO NOTHING;
+
+SELECT 'Base de datos inicializada correctamente' AS status;
