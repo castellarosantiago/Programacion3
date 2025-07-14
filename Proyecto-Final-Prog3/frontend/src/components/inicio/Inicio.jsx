@@ -4,7 +4,7 @@ import Personalizacion from './Personalizacion';
 import TarjetasMeditacion from './TarjetasMeditacion';
 import CategoriasImagenes from './CategoriasImagenes';
 
-const Inicio = () => {
+const Inicio = ({usuario}) => {
   const [personalizacion, setPersonalizacion] = useState({
     inhalar: 4,
     aguantar: 4,
@@ -27,7 +27,8 @@ const Inicio = () => {
   };
 
   const guardarPreferencia = (nueva) => {
-    const actualizadas = [...preferencias, nueva];
+    const nuevaConUsuario = {...nueva, userId: usuario.id}
+    const actualizadas = [...preferencias, nuevaConUsuario];
     localStorage.setItem("preferencias", JSON.stringify(actualizadas));
     setPreferencias(actualizadas);
   };

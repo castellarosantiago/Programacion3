@@ -33,6 +33,7 @@ function Personalizacion({ personalizacion, onChange, onGuardar }) {
   //         hold: aguantar,
   //         exhale: exhalar,
   //         cicles: ciclos
+  //         userId:usuario.id
   //       })
   //     });
 
