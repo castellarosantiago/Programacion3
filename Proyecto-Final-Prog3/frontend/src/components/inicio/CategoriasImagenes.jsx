@@ -20,7 +20,7 @@ function GaleriaImagenes(onSeleccionarImagen) {
   useEffect(() => {
     const obtenerColecciones = async () => {
       try {
-        const res = await fetch('http://localhost:3001/categories'); 
+        const res = await fetch('http://localhost:3001/api/categories'); 
         const data = await res.json();
 
         const mapeadas = data.map((categoria) => ({

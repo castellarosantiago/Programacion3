@@ -15,3 +15,21 @@ exports.getAllCategories = async (req, res) => {
         res.status(500).json({ error: 'Error getting categories' });
     }
 };
+
+exports.getImagesByCategory = async (req, res) => {
+    try {
+        const { categoryId } = req.params;
+        const images = await Images_category.findAll({
+            where: { id_category: categoryId },
+            include: [{
+                model: Categories,
+                as: 'Category',
+                attributes: ['name']
+            }]
+        });
+        res.json(images);
+    } catch (error) {
+        console.error('Error fetching images by category:', error);
+        res.status(500).json({ error: 'Error getting images' });
+    }
+};
