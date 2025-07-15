@@ -74,31 +74,35 @@ const ContadorMeditador = ({ duracion, backgroundImage  }) => {
   };
 
 
-   return (
-    <div className="contador-wrapper"   style={{
-    backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
-  }}>
-      <div className="contador-meditador">
-        <div className="breath-circle-container">
-          <div className="breath-circle-bg" />
-          <div
-            className={`breath-circle ${animar ? estado : ''}`}
-            style={animar ? { animationDuration: `${duracion[estado]}s` } : {}}
-          />
-        </div>
-        <div className="estado">{estado}</div>
-        <div className="counter">{tiempoRestante} s</div>
-        <div className="controls">
-          <button className="button" onClick={iniciarMeditacion}>Iniciar</button>
-          <button className="button" onClick={pausarMeditacion}>Pausar</button>
-          <button className="button" onClick={reiniciarMeditacion}>Reiniciar</button>
-        </div>
-        <p className="ciclo">Ciclo: {ciclo} / {duracion.ciclos}</p>
+ return (
+  <div className="contador-wrapper">
+    <div
+      className="contador-meditador"
+      style={{
+        backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="breath-circle-container">
+        <div className="breath-circle-bg" />
+        <div
+          className={`breath-circle ${animar ? estado : ''}`}
+          style={animar ? { animationDuration: `${duracion[estado]}s` } : {}}
+        />
       </div>
+      <div className="estado">{estado}</div>
+      <div className="counter">{tiempoRestante} s</div>
+      <div className="controls">
+        <button className="button" onClick={iniciarMeditacion}>Iniciar</button>
+        <button className="button" onClick={pausarMeditacion}>Pausar</button>
+        <button className="button" onClick={reiniciarMeditacion}>Reiniciar</button>
+      </div>
+      <p className="ciclo">Ciclo: {ciclo} / {duracion.ciclos}</p>
     </div>
-  );};
+  </div>
+);
+};
 
 export default ContadorMeditador;

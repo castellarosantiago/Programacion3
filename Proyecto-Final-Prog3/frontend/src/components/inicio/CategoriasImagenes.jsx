@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
+import '../../styles/categoriaImagenes.css'
 
 function Card({ id, nombre, imagen, isSelected, seleccionarCard }) {
   return (
     <div
       className={`card ${isSelected ? 'selected' : ''}`}
       onClick={() => seleccionarCard(id)}
-      style={{ backgroundImage: `url(${imagen})` }}
+      style={imagen ? {backgroundImage :`url(${imagen})` }:{}}
     >
       <div className="card-title">{nombre}</div>
     </div>
@@ -22,7 +22,7 @@ function GaleriaImagenes({onSeleccionarImagen}) {
       try {
         const res = await fetch('http://localhost:3001/api/categories'); 
         const data = await res.json();
-
+        console.log('Categorias API: ', data);
         const mapeadas = data.map((categoria) => ({
           id: categoria.id_category,
           nombre: categoria.name,
@@ -30,6 +30,7 @@ function GaleriaImagenes({onSeleccionarImagen}) {
           imagenes: categoria.Images_categories, 
         }));
 
+        console.log('colecciones: ', mapeadas);
         setColecciones(mapeadas);
       } catch (error) {
         console.error('Error al obtener categorías:', error);
