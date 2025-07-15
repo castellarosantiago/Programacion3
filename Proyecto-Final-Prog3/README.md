@@ -41,8 +41,48 @@ Este proyecto es una aplicación web de meditación donde los usuarios pueden ac
 ✔️ Componentes en desarrollo
 ✔️ Diseño frontend en desarrollo
 ✔️ Rutas en desarrollo 
-🔒 Login 
-🔒  Base de datos
-🔒  Modelos
+✔️ Login 
+✔️  Base de datos
+✔️  Modelos
 
 ---
+## ⚙ Correr el proyecto
+
+💻 docker compose up --build
+
+- backend/Dockerfile:
+  - FROM node:18-alpine
+
+  - WORKDIR /app
+
+  - # Instalar dependencias
+  - COPY package*.json ./
+  - RUN npm install
+  
+  - # Copiar código fuente
+  - COPY . .
+  
+  - # Exponer puerto
+  - EXPOSE 3001
+  
+  - # Comando por defecto
+  - CMD ["npm", "run", "dev"]
+
+- frontend/Dockerfile:
+  # frontend/Dockerfile
+ - FROM node:18-alpine
+
+  -WORKDIR /app
+
+  # Instalar dependencias
+  -COPY package*.json ./
+  -RUN npm install
+
+  # Copiar código fuente
+  -COPY . .
+
+  # Exponer puerto
+  -EXPOSE 3000
+
+  # Comando por defecto
+  -CMD ["npm", "start"]
