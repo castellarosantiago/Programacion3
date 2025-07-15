@@ -25,6 +25,7 @@ const Users = require('./usersModel')(sequelize, Sequelize.DataTypes);
 const Images_category = require('./imagesModel')(sequelize, Sequelize.DataTypes);
 const Categories = require('./categoriesModel')(sequelize, Sequelize.DataTypes);
 
+
 module.exports = {
   sequelize,
   Sequelize,

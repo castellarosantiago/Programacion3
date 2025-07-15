@@ -13,7 +13,7 @@ function Card({ id, nombre, imagen, isSelected, seleccionarCard }) {
   );
 }
 
-function GaleriaImagenes(onSeleccionarImagen) {
+function GaleriaImagenes({onSeleccionarImagen}) {
   const [colecciones, setColecciones] = useState([]);
   const [seleccionada, setSeleccionada] = useState(null);
 

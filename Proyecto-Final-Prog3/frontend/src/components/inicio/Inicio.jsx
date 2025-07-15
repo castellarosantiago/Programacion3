@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ContadorMeditador from './ContadorMeditador';
 import Personalizacion from './Personalizacion';
 import TarjetasMeditacion from './TarjetasMeditacion';
-import CategoriasImagenes from './CategoriasImagenes';
+import GaleriaImagenes from './CategoriasImagenes';
 
 const Inicio = ({usuario}) => {
   const [personalizacion, setPersonalizacion] = useState({
@@ -81,7 +81,7 @@ const cargarPreferencias = useCallback(async () => {
         onSeleccionar={handlePersonalizacionChange}
         onBorrar={borrarPreferencia}
       />
-      <CategoriasImagenes  onSeleccionarImagen={setImagenFondo}/>
+      <GaleriaImagenes  onSeleccionarImagen={setImagenFondo}/>
     </div>
   );
 };
