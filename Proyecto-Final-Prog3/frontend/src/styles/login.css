@@ -1,0 +1,77 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--color-fondo);
+}
+
+.login-card {
+  background-color: var(--color-panel);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: var(--sombra-suave);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 400px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-texto);
+  margin: 0;
+  text-align: center;
+}
+
+.login-card input {
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff0f;
+  color: var(--color-texto);
+}
+
+.login-card input::placeholder {
+  color: #ccc;
+}
+
+.login-card .error {
+  color: #ff4f4f;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
+.login-card button {
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-card button:hover {
+  background-color: var(--color-secundario);
+}
+
+.alternar-modo {
+  text-align: center;
+  font-size: 14px;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.alternar-modo:hover {
+  color: var(--color-texto);
+}

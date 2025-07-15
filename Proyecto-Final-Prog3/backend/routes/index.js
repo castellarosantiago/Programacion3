@@ -1,26 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-// Ruta de prueba
-router.get('/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
-    message: 'API funcionando correctamente',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
-  });
-});
+// Importar rutas
+const preferencesRoutes = require('./preferencesRoutes.js');
+const authRoutes = require('./authRoutes.js')
+const categoriesRoutes = require('./categoriesRoutes.js'); 
 
-// Ruta de ejemplo
-router.get('/test', (req, res) => {
-  res.json({
-    message: 'Endpoint de prueba',
-    data: {
-      backend: 'Express',
-      database: 'PostgreSQL',
-      orm: 'Sequelize'
-    }
-  });
-});
+
+// Rutas de tareas
+router.use('/preferences', preferencesRoutes);
+router.use('/auth', authRoutes)
+router.use('/categories', categoriesRoutes); 
+
 
 module.exports = router;

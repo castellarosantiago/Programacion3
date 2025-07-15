@@ -33,6 +33,9 @@ Este proyecto es una aplicación web de meditación donde los usuarios pueden ac
 
 - La aplicación cuenta con un sistema de **login**.
 - Solo los usuarios autenticados pueden **guardar sus meditaciones personalizadas**.
+- USUARIO DEFAULT PARA INICIAR SESIÓN:
+  # Usuario (email): demo@gmail.com
+  # Contraseña: 12345678
 
 ---
 
@@ -41,8 +44,56 @@ Este proyecto es una aplicación web de meditación donde los usuarios pueden ac
 ✔️ Componentes en desarrollo
 ✔️ Diseño frontend en desarrollo
 ✔️ Rutas en desarrollo 
-🔒 Login 
-🔒  Base de datos
-🔒  Modelos
+✔️ Login 
+✔️  Base de datos
+✔️  Modelos
 
 ---
+## ⚙ Correr el proyecto
+
+💻 docker compose up --build
+
+- backend/Dockerfile:
+  - FROM node:18-alpine
+
+  - WORKDIR /app
+
+  - # Instalar dependencias
+  - COPY package*.json ./
+  - RUN npm install
+  
+  - # Copiar código fuente
+  - COPY . .
+  
+  - # Exponer puerto
+  - EXPOSE 3001
+  
+  - # Comando por defecto
+  - CMD ["npm", "run", "dev"]
+
+- frontend/Dockerfile:
+  # frontend/Dockerfile
+ - FROM node:18-alpine
+
+  -WORKDIR /app
+
+  # Instalar dependencias
+  -COPY package*.json ./
+  -RUN npm install
+
+  # Copiar código fuente
+  -COPY . .
+
+  # Exponer puerto
+  -EXPOSE 3000
+
+  # Comando por defecto
+  -CMD ["npm", "start"]
+
+# 📖 A tener en cuenta
+- Para dejar de correr la app :
+  - docker compose down 
+  # Se vuelve a iniciar con docker compose up y se mantienen los datos registrados.
+- Si se quieren borrar los volumenes y por consecuencia la base de datos:
+  - docker compose down -v
+  # Esto borraria toda la instalacion en el contenedor, y limpiaria la base de datos, dejando solo el user default.

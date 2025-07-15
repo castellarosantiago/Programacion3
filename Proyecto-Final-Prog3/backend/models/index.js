@@ -19,7 +19,26 @@ const sequelize = new Sequelize(
   }
 );
 
-module.exports = {
+// Importar modelos
+const Personalized_breaths = require('./preferencesModel')(sequelize, Sequelize.DataTypes);
+const Users = require('./usersModel')(sequelize, Sequelize.DataTypes);
+const Images_category = require('./imagesModel')(sequelize, Sequelize.DataTypes);
+const Categories = require('./categoriesModel')(sequelize, Sequelize.DataTypes);
+
+const db = {
   sequelize,
-  Sequelize
+  Sequelize,
+  Personalized_breaths,
+  Users,
+  Images_category,
+  Categories
 };
+
+if (Categories.associate) {
+  Categories.associate(db);
+}
+if (Images_category.associate) {
+  Images_category.associate(db);
+}
+
+module.exports = db;

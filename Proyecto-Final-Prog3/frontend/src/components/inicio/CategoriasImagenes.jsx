@@ -1,29 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import '../../styles/categoriaImagenes.css'
 
-const coleccion_tarjetas = [
-    {id: 1, nombre: 'Playa', imagenes: ''},
-    {id: 2, nombre: 'Espacio', imagenes: ''},
-    {id: 3, nombre: 'Montañas', imagenes: ''},
-    {id: 4, nombre: 'Fogatas', imagenes: ''},
-    {id: 5, nombre: 'Cascadas', imagenes: ''},
-    {id: 6, nombre: 'Ciudad', imagenes: ''}
-];
-
-
-function CategoriasImagenes({ onSeleccionar }) {
+function Card({ id, nombre, imagen, isSelected, seleccionarCard }) {
   return (
-    <div className="galeria">
-      {coleccion_tarjetas.map((coleccion) => (
-        <div
+    <div
+      className={`card ${isSelected ? 'selected' : ''}`}
+      onClick={() => seleccionarCard(id)}
+      style={imagen ? {backgroundImage :`url(${imagen})` }:{}}
+    >
+      <div className="card-title">{nombre}</div>
+    </div>
+  );
+}
+
+function GaleriaImagenes({onSeleccionarImagen}) {
+  const [colecciones, setColecciones] = useState([]);
+  const [seleccionada, setSeleccionada] = useState(null);
+
+  useEffect(() => {
+    const obtenerColecciones = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/api/categories'); 
+        const data = await res.json();
+        console.log('Categorias API: ', data);
+        const mapeadas = data.map((categoria) => ({
+          id: categoria.id_category,
+          nombre: categoria.name,
+          imagen: categoria.Images_categories[0]?.url_image || '', 
+          imagenes: categoria.Images_categories, 
+        }));
+
+        console.log('colecciones: ', mapeadas);
+        setColecciones(mapeadas);
+      } catch (error) {
+        console.error('Error al obtener categorías:', error);
+      }
+    };
+
+    obtenerColecciones();
+  }, []);
+
+  const seleccionarCard = (id, imagen) => {
+    setSeleccionada(id);
+    onSeleccionarImagen(imagen);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  return (
+    <div className="galeria-imagenes">
+      {colecciones.map((coleccion) => (
+        <Card
           key={coleccion.id}
-          className="tarjeta"
-          onClick={() => onSeleccionar && onSeleccionar(coleccion.id)}
-        >
-          <h3>{coleccion.nombre}</h3>
-        </div>
+          id={coleccion.id}
+          nombre={coleccion.nombre}
+          imagen={coleccion.imagen}
+          isSelected={seleccionada === coleccion.id}
+          seleccionarCard={() => seleccionarCard(coleccion.id, coleccion.imagen)}
+        />
       ))}
     </div>
   );
 }
 
-export default CategoriasImagenes;
+export default GaleriaImagenes;
