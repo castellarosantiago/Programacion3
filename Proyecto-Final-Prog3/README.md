@@ -33,6 +33,9 @@ Este proyecto es una aplicación web de meditación donde los usuarios pueden ac
 
 - La aplicación cuenta con un sistema de **login**.
 - Solo los usuarios autenticados pueden **guardar sus meditaciones personalizadas**.
+- USUARIO DEFAULT PARA INICIAR SESIÓN:
+  # Usuario (email): demo@gmail.com
+  # Contraseña: 12345678
 
 ---
 
@@ -86,3 +89,11 @@ Este proyecto es una aplicación web de meditación donde los usuarios pueden ac
 
   # Comando por defecto
   -CMD ["npm", "start"]
+
+# 📖 A tener en cuenta
+- Para dejar de correr la app :
+  - docker compose down 
+  # Se vuelve a iniciar con docker compose up y se mantienen los datos registrados.
+- Si se quieren borrar los volumenes y por consecuencia la base de datos:
+  - docker compose down -v
+  # Esto borraria toda la instalacion en el contenedor, y limpiaria la base de datos, dejando solo el user default.
