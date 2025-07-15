@@ -16,7 +16,7 @@ CREATE TABLE Images_category (
 CREATE TABLE Users (
   id_user SERIAL PRIMARY KEY,
   mail VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL -- Habías escrito "VERCHAR"
+  password VARCHAR(255) NOT NULL 
 );
 
 -- Meditaciones personalizadas creadas por usuarios

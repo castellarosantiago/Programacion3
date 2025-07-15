@@ -7,30 +7,12 @@ const Login = ({ onLoginExitoso }) => {
     const [pass, setPass] = useState('');
     const [error, setError] = useState('');
 
-    //PRUEBAS EN LOCAL - DESCOMENTAR
-    /* const usuarioHardcodeado = {
-    id: 1,
-    email: "demo@prueba.com",
-    password: "12345678", // mínimo 8 caracteres
-    preferencias: [
-      {
-        title: "Relajación básica",
-        inhale: 4,
-        hold: 4,
-        exhale: 4,
-        cicles: 3,
-        userId: 1
-      }
-    ]
-  };*/
-
     const toggleRegistrado = () => {
         setIsRegistrado(!isRegistrado);
         setError('');
     };
 
-     //cuando se inicia sesion, se traen las preferencias del id de ese usuario,
-     //asi que al guardarlas, las preferencias deben guardar el id del usuario actual
+
      const handleLoginRegistro = async () => {
          if (pass.length < 8) {
              setError('La contraseña debe tener al menos 8 caracteres.');
@@ -43,7 +25,7 @@ const Login = ({ onLoginExitoso }) => {
              const res = await fetch(url, {
                  method: 'POST',
                  headers: { 'Content-Type': 'application/json' },
-                 body: JSON.stringify({ email, pass }) // usar "contrasena" si tu backend lo espera así
+                 body: JSON.stringify({ email, pass }) 
              });
 
              const data = await res.json();
@@ -53,11 +35,7 @@ const Login = ({ onLoginExitoso }) => {
                  return;
              }
 
-             // guardar usuario logueado
-            //  localStorage.setItem('usuarioActual', JSON.stringify(data.usuario));
-            //  localStorage.setItem('preferencias', JSON.stringify(data.usuario.preferencias || []));
 
-             // callback para pasar el user al App
              onLoginExitoso(data.usuario);
 
          } catch (err) {
@@ -66,31 +44,6 @@ const Login = ({ onLoginExitoso }) => {
          }
      };
 
-
-     //PRUEBAS EN LOCAL - DESCOMENTAR
- /*    const handleLoginRegistro = async () => {
-    if (pass.length < 8) {
-      setError('La contraseña debe tener al menos 8 caracteres.');
-      return;
-    }
-
-    // Simulación de login sin backend
-    if (!isRegistrado) {
-      // INICIO DE SESIÓN
-      if (email === usuarioHardcodeado.email && pass === usuarioHardcodeado.password) {
-        // Guardas en localStorage
-        localStorage.setItem('usuarioActual', JSON.stringify(usuarioHardcodeado));
-        localStorage.setItem('preferencias', JSON.stringify(usuarioHardcodeado.preferencias));
-
-        onLoginExitoso(usuarioHardcodeado);
-      } else {
-        setError("Usuario o contraseña incorrectos.");
-      }
-    } else {
-      // REGISTRO SIMULADO
-      setError("Registro simulado: aún no está conectado al backend.");
-    }
-  };*/
 
     return (
         <div className="login-wrapper">

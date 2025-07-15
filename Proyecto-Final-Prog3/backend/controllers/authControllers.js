@@ -57,7 +57,7 @@ const authController = {
         return res.status(401).json({ mensaje: 'Datos de inicio inválidos' });
       }
       
-      // Respuesta exitosa
+      // respuesta exitosa
       res.status(200).json({
         mensaje: 'Login exitoso',
         usuario: {

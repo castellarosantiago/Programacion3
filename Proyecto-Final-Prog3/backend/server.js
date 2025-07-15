@@ -105,18 +105,3 @@ process.on('SIGINT', async () => {
 });
 
 
-// const app = require('./app');
-// const sequelize = require('./config/database');
-// const {User} = require('./models');
-
-// sequelize.sync({alter:true}).then(async () => {
-//   console.log('Base de datos OK');
-//   //crear usuario demo
-//   const[user, created] = await User.findOrCreate({
-//     where:{email: 'demo@meditacion.com'},
-//     defaults: {password:'1234'},
-//   });
-//   if(created) console.log('usuario demo creado');
-
-//   app.listen(3001, () => console.log('server corriendo en puerto 3001'));
-// });

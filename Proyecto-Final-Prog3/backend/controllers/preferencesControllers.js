@@ -1,10 +1,5 @@
 const { Personalized_breaths } = require("../models");
 
-
-// TODO: 
-  // Ahora le pasamos el id de ususario hardcodeado, pero deberiamos ibtener el id del  ususario desde el login y pasarselo aca.
-  // Lo mismo con el id_breath, debemos obtenerlo desde el front con el componente de santi.
-
 const createPreference = async (req, res) => {
   try {
     const { id_user } = req.params;

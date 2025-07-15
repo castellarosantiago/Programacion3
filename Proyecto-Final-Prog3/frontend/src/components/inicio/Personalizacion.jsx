@@ -53,28 +53,6 @@ function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada, usu
       console.error("Error al guardar:", error);
     }
   };
-
-  // const guardar = () => {
-  //   if(!titulo.trim()){
-  //     alert("Por favor incluya un titulo para su meditacion personalizada");
-  //     return;
-  //   }
-  // }
-  // const nuevaPersonalizacion = {
-  //   title: titulo,
-  //   inhale: inhalar, 
-  //   hold: aguantar,
-  //   exhale: exhalar,
-  //   cicles: ciclos
-  // };
-
-  //agarrar las existentes para agregar la nueva
-  // const persCargadas = JSON.parse(localStorage.getItem("preferencias")) || [];
-  // const persActualizadas = [...persCargadas, nuevaPersonalizacion];
-  // localStorage.setItem("preferencias", JSON.stringify(persActualizadas));
-  // onGuardar(nuevaPersonalizacion);
-  // alert("Nueva personalizacion guardada en localStorage");
-  // };
   
 
   return (

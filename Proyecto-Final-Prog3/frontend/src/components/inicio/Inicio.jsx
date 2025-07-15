@@ -30,13 +30,6 @@ const cargarPreferencias = useCallback(async () => {
     setPreferencias([]);
   }
 }, [usuario.id]);
-
-  // useEffect(() => {
-  //   if (usuario) {
-  //     cargarPreferencias();
-  //   }
-  // }, [usuario]);
-
   
   useEffect(() => {
     cargarPreferencias();
