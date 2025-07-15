@@ -43,6 +43,7 @@ function GaleriaImagenes({onSeleccionarImagen}) {
   const seleccionarCard = (id, imagen) => {
     setSeleccionada(id);
     onSeleccionarImagen(imagen);
+    window.scrollTo({top: 0, behavior: 'smooth'});
   };
 
   return (

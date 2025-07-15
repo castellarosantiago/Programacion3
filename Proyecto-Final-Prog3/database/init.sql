@@ -60,7 +60,7 @@ ON CONFLICT (name) DO NOTHING;
 --IMAGENES: ver que existan las categorias y usar los ids
 
 INSERT INTO "Images_category"(id_category, url_image)
-SELECT id_category, 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80'
+SELECT id_category, 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 FROM "Categories" WHERE name = 'Montañas';
 
 INSERT INTO "Images_category"(id_category, url_image)
@@ -68,15 +68,15 @@ SELECT id_category, 'https://images.unsplash.com/photo-1507525428034-b723cf961d3
 FROM "Categories" WHERE name = 'Playa';
 
 INSERT INTO "Images_category"(id_category, url_image)
-SELECT id_category, 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80'
+SELECT id_category, 'https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 FROM "Categories" WHERE name = 'Bosque';
 
 INSERT INTO "Images_category"(id_category, url_image)
-SELECT id_category, 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=1600&q=80'
+SELECT id_category, 'https://images.unsplash.com/photo-1555397430-57791c75748a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 FROM "Categories" WHERE name = 'Ciudades';
 
 INSERT INTO "Images_category"(id_category, url_image)
-SELECT id_category, 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80'
+SELECT id_category, 'https://images.unsplash.com/photo-1617500756598-a0ee57567ac8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 FROM "Categories" WHERE name = 'Animales';
 
 SELECT 'Base de datos inicializada correctamente' AS status;

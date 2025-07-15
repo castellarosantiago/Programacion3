@@ -2,6 +2,16 @@ import React from 'react';
 import '../../styles/tarjetasMeditacion.css'
 
 const TarjetasMeditacion = ({ preferencias, onSeleccionar, onBorrar }) => {
+    const handleIniciar = (pref) => {
+    onSeleccionar({
+      titulo: pref.title,
+      inhalar: pref.inhale,
+      aguantar: pref.hold,
+      exhalar: pref.exhale,
+      ciclos: pref.cycles,
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <div className="contenedor-preferencias">
       <h2>Preferencias Guardadas</h2>
@@ -16,19 +26,7 @@ const TarjetasMeditacion = ({ preferencias, onSeleccionar, onBorrar }) => {
               <p><strong>Aguantar:</strong> {pref.hold} seg</p>
               <p><strong>Exhalar:</strong> {pref.exhale} seg</p>
               <p><strong>Ciclos:</strong> {pref.cycles}</p>
-              <button
-                onClick={() =>
-                  onSeleccionar({
-                    titulo: pref.title,
-                    inhalar: pref.inhale,
-                    aguantar: pref.hold,
-                    exhalar: pref.exhale,
-                    ciclos: pref.cycles
-                  })
-                }
-              >
-                Iniciar
-              </button>
+              <button onClick={() => handleIniciar(pref)}>Iniciar</button>
               <button className="btn-borrar" onClick={() => onBorrar(pref.id_breath || index)}>
                 Borrar
               </button>
