@@ -79,6 +79,8 @@ function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada, usu
 
   return (
     <div className="personalizacion">
+                  <h1>Guarde aquí su Meditación Personalizada</h1>
+
       <div className='personalizacion-wrapper'>
         <div className="personalizacion-campos">
           <div>

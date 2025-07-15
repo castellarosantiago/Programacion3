@@ -14,9 +14,9 @@ const TarjetasMeditacion = ({ preferencias, onSeleccionar, onBorrar }) => {
   };
   return (
     <div className="contenedor-preferencias">
-      <h2>Preferencias Guardadas</h2>
+      <h2>Meditaciones Guardadas</h2>
       {preferencias.length === 0 ? (
-        <p>Todavía no guardaste ninguna preferencia.</p>
+        <p>Todavía no guardaste ninguna meditación.</p>
       ) : (
         <div className="grid-preferencias">
           {preferencias.map((pref, index) => (

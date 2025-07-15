@@ -74,6 +74,7 @@ const cargarPreferencias = useCallback(async () => {
 
   return (
     <div>
+      <h4>Gracias por usar MeditApp!</h4>
       <ContadorMeditador duracion={personalizacion}  backgroundImage = {imagenFondo}/>
       <Personalizacion
         personalizacion={personalizacion}
