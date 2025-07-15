@@ -48,17 +48,22 @@ const cargarPreferencias = useCallback(async () => {
 
   const borrarPreferencia = async (id_breath) => {
     try {
+      setPreferencias(prev => prev.filter(pref => pref.id_breath !== id_breath));
+      
       const response = await fetch(`http://localhost:3001/api/preferences/${id_breath}`, {
         method: 'DELETE'
       });
       
-      if (response.ok) {
+      if (!response.ok) {
         await cargarPreferencias();
+        throw new Error('Error al borrar la preferencia');
       } 
 
     } catch (error) {
       console.error("Error al borrar la preferencia:", error);
       alert("Error al borrar la preferencia");
+      await cargarPreferencias();
+
     }
   };
 
