@@ -52,7 +52,7 @@ const authController = {
       }
 
       //  contraseña
-      const passwordValida = pass === usuario.password;
+      const passwordValida = (pass === usuario.password);
       if (!passwordValida) {
         return res.status(401).json({ mensaje: 'Datos de inicio inválidos' });
       }

@@ -38,7 +38,7 @@ function Personalizacion({ personalizacion, onChange, onPreferenciaGuardada, usu
       });
 
       if (res.ok) {
-        alert("Meditación guardada con éxito");
+        console.log("Meditación guardada con éxito");
         // Podríamos emitir un evento o usar un callback para actualizar PreferenciasGuardadas  
 
         // limpia el formulario
